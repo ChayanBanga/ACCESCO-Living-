@@ -1,0 +1,76 @@
+/* style.css */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.header {
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%; /* Responsive width */
+    max-width: 1200px; /* Maximum width on larger screens */
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+    justify-content: space-around;
+}
+
+.data-entry, .data-display {
+    width: 45%; /* Responsive width for data entry and display */
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.data-entry form {
+    display: flex;
+    flex-direction: column;
+}
+
+.data-entry input[type="text"],
+.data-entry input[type="file"],
+.data-entry button {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.data-entry button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.student-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center; /* Vertically align image and text */
+}
+
+.student-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .data-entry, .data-display {
+        width: 90%; /* Stack sections on smaller screens */
+    }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Entry & Display</title>
+    <link rel="stylesheet" href="hackathon project sample.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Student Data Management</h1>
+    </div>
+
+    <div class="container">
+        <div class="data-entry">
+            <h2>Enter Student Data</h2>
+            <form id="studentForm">
+                <input type="text" id="instituteName" placeholder="Institute Name" required><br>
+                <input type="text" id="studentName" placeholder="Student Name" required><br>
+                <input type="text" id="rollNumber" placeholder="Roll Number" required><br>
+                <input type="text" id="subjects" placeholder="Subjects (comma-separated)" required><br>
+                <input type="text" id="marks" placeholder="Marks (comma-separated)" required><br>
+                <input type="file" id="studentImage" accept="image/*"><br>
+                <button type="submit">Add Student</button>
+            </form>
+        </div>
+
+        <div class="data-display">
+            <h2>Student Data</h2>
+            <div id="studentList">
+                </div>
+        </div>
+    </div>
+
+    <script src="hackathon project sample.js"></script>
+</body>
+</html>
