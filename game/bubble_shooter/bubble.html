@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Shooter</title>
+    <link rel="stylesheet" href="bubble.css">
+</head>
+<body>
+    <!-- Main Menu -->
+    <div id="mainMenu" class="screen active">
+        <div class="menu-container">
+            <h1 class="game-title">BUBBLE<br>SHOOTER</h1>
+            <div class="menu-buttons">
+                <button class="stone-button" id="playBtn">PLAY</button>
+                <button class="stone-button" id="leaderboardBtn">LEADERBOARD</button>
+                <button class="stone-button" id="skinsBtn">SKINS</button>
+                <button class="stone-button music-toggle" id="menuMusicBtn">🔊 MUSIC ON</button>
+            </div>
+            <div class="coins-display">
+                <span class="coin-icon">🪙</span>
+                <span id="menuCoins">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div id="gameContainer">
+            <div class="game-header">
+                <div class="header-item">
+                    <span class="label">LEVEL</span>
+                    <span id="levelDisplay">1</span>
+                </div>
+                <div class="header-item">
+                    <span class="label">TIME</span>
+                    <span id="timerDisplay">00:00</span>
+                </div>
+                <div class="header-item">
+                    <span class="label">SCORE</span>
+                    <span id="scoreDisplay">0</span>
+                </div>
+                <div class="header-item">
+                    <span class="coin-icon">🪙</span>
+                    <span id="gameCoins">0</span>
+                </div>
+            </div>
+
+            <div id="canvas-container">
+                <canvas id="gameCanvas"></canvas>
+            </div>
+
+            <div class="gameStats">
+                <button class="control-button" id="hintBtn">💡 HINT (<span id="hintCount">3</span>)</button>
+                <button class="control-button" id="pauseBtn">⏸ PAUSE</button>
+                <button class="control-button" id="restartBtn">🔄 RESTART</button>
+                <button class="control-button" id="musicBtn">🔊 MUSIC</button>
+                <button class="control-button" id="menuBtn">🏠 MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Screen -->
+    <div id="leaderboardScreen" class="screen">
+        <div class="menu-container">
+            <h2 class="subtitle">LEADERBOARD</h2>
+            <div class="leaderboard-list" id="leaderboardList">
+                <!-- Leaderboard entries will be inserted here -->
+            </div>
+            <button class="stone-button" id="backFromLeaderboard">BACK</button>
+        </div>
+    </div>
+
+    <!-- Skins Screen -->
+    <div id="skinsScreen" class="screen">
+        <div class="menu-container">
+            <h2 class="subtitle">POWER-UPS</h2>
+            <div class="coins-display">
+                <span class="coin-icon">🪙</span>
+                <span id="skinsCoins">0</span>
+            </div>
+            <div class="leaderboard-entries" id="skinsGrid">
+                <!-- Skins will be inserted here -->
+            </div>
+            <button class="stone-button" id="backFromSkins">BACK</button>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div id="pauseModal" class="modal">
+        <div class="modal-content">
+            <h2>PAUSED</h2>
+            <button class="stone-button" id="resumeBtn">RESUME</button>
+            <button class="stone-button" id="restartFromPause">RESTART</button>
+            <button class="stone-button" id="menuFromPause">MENU</button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">LEVEL COMPLETE!</h2>
+            <div class="stats">
+                <p>Score: <span id="finalScore">0</span></p>
+                <p>Time: <span id="finalTime">00:00</span></p>
+                <p>Coins Earned: <span id="coinsEarned">0</span> 🪙</p>
+            </div>
+            <button class="stone-button" id="nextLevelBtn">NEXT LEVEL</button>
+            <button class="stone-button" id="restartFromGameOver">RESTART</button>
+            <button class="stone-button" id="menuFromGameOver">MENU</button>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notification" class="notification hidden">
+        <h3 id="notificationTitle">Notice</h3>
+        <p id="notificationMessage"></p>
+        <div class="notification-buttons">
+            <button class="notification-btn confirm" id="notificationConfirm">OK</button>
+            <button class="notification-btn cancel" id="notificationCancel" style="display: none;">CANCEL</button>
+        </div>
+    </div>
+
+    <script src="bubble.js"></script>
+</body>
+</html>
