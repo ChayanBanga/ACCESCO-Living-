@@ -333,6 +333,324 @@
       z-index: 1; 
     }
 
+    /* ===== COFOUNDERS SECTION ===== */
+    .cofounders-section {
+        background: #fff2eb;
+        padding: 100px 20px;
+        position: relative;
+    }
+
+    .cofounders-grid {
+        max-width: 1200px;
+        margin: 60px auto 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 45px;
+        align-items: stretch;
+    }
+
+    .cofounder-card {
+        background: linear-gradient(180deg, #fff 0%, #f8f6f4 100%);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(112, 4, 87, 0.1), 0 2px 8px rgba(112, 4, 87, 0.06);
+        border: 1.5px solid rgba(112, 4, 87, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cofounder-card:hover {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 0 24px 48px rgba(112, 4, 87, 0.25), 0 12px 24px rgba(112, 4, 87, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        border-color: rgba(112, 4, 87, 0.15);
+    }
+
+    .cofounders-section .section-title {
+        margin-bottom: 20px;
+    }
+
+    .cofounders-section .muted-center {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 1.6px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: var(--accent);
+    }
+
+    .cofounders-section .muted-center::before {
+        content: "";
+        width: 36px;
+        height: 2px;
+        background: linear-gradient(90deg, #ffb347, var(--accent));
+        border-radius: 999px;
+        display: inline-block;
+    }
+
+    .cofounders-section .big-h {
+        font-size: 48px;
+        font-family: 'Davetica', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+    }
+
+    .cofounder-image-wrapper {
+        position: relative;
+        height: 220px;
+        width: 220px;
+        background: linear-gradient(135deg, #ffeae0 0%, #f5d9e8 50%, #ffe8d1 100%);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        border-radius: 50%;
+        border: 5px solid #a01e7d;
+        box-shadow: inset 0 0 20px rgba(160, 30, 125, 0.2), 0 10px 30px rgba(160, 30, 125, 0.15);
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .cofounder-image-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+    }
+
+    .cofounder-card:hover .cofounder-image-wrapper::after {
+        opacity: 1;
+    }
+
+    .cofounder-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+        border-radius: 50%;
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 8px 24px rgba(112, 4, 87, 0.15);
+    }
+
+    .cofounder-card:hover .cofounder-image-wrapper img {
+        transform: scale(1.08);
+    }
+
+    .cofounder-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.12) 0%, rgba(160, 30, 125, 0.1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 100px;
+        color: rgba(112, 4, 87, 0.3);
+        transition: all 0.5s ease;
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(112, 4, 87, 0.15);
+    }
+
+    .cofounder-card:hover .cofounder-placeholder {
+        color: rgba(112, 4, 87, 0.4);
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.12) 0%, rgba(255, 179, 71, 0.08) 100%);
+        mix-blend-mode: multiply;
+        pointer-events: none;
+    }
+
+    .cofounder-content {
+        padding: 32px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        flex-grow: 1;
+        position: relative;
+    }
+
+    .cofounder-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 32px;
+        right: 32px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(112, 4, 87, 0.1), rgba(112, 4, 87, 0), rgba(112, 4, 87, 0.1));
+    }
+
+    .cofounder-name {
+        font-size: 28px;
+        font-weight: 900;
+        color: #1a0014;
+        margin: 0;
+        letter-spacing: -0.4px;
+        margin-top: 12px;
+        font-family: 'Davetica', sans-serif;
+    }
+
+    .cofounder-role {
+        font-size: 16px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1.8px;
+        background: linear-gradient(90deg, #5a1d5f 0%, #7d2a82 50%, #a01e7d 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+    }
+
+    .cofounder-description {
+        font-size: 16px;
+        color: #3a2a3a;
+        line-height: 1.85;
+        margin: 12px 0 0;
+        font-weight: 500;
+        flex-grow: 1;
+        letter-spacing: 0.25px;
+    }
+
+    .cofounder-social {
+        display: flex;
+        gap: 14px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(112, 4, 87, 0.08);
+        flex-wrap: wrap;
+    }
+
+    .cofounder-social a {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.06), rgba(112, 4, 87, 0.04));
+        color: var(--accent);
+        font-size: 22px;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        border: 1.5px solid rgba(112, 4, 87, 0.1);
+        position: relative;
+    }
+
+    .cofounder-social a::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--accent);
+        border-radius: 12px;
+        opacity: 0;
+        transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: -1;
+    }
+
+    .cofounder-social a:hover {
+        background: linear-gradient(135deg, var(--accent), #a01e7d);
+        color: #fff;
+        transform: translateY(-10px) scale(1.2) rotate(8deg);
+        box-shadow: 0 16px 40px rgba(112, 4, 87, 0.35), 0 10px 20px rgba(112, 4, 87, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+        border-color: var(--accent);
+    }
+
+    .cofounder-social a:active {
+        transform: translateY(-2px) scale(1.08);
+        box-shadow: 0 6px 16px rgba(112, 4, 87, 0.28);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+        .cofounders-grid {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        .cofounder-image-wrapper {
+            height: 340px;
+        }
+
+        .cofounder-content {
+            padding: 36px 28px;
+        }
+
+        .cofounder-name {
+            font-size: 26px;
+        }
+
+        .cofounder-description {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .cofounders-section {
+            padding: 80px 16px;
+        }
+
+        .cofounders-grid {
+            gap: 40px;
+            margin: 40px auto 0;
+        }
+
+        .cofounder-card {
+            border-radius: 16px;
+        }
+
+        .cofounder-image-wrapper {
+            height: 280px;
+            padding: 16px;
+        }
+
+        .cofounder-content {
+            padding: 28px 20px;
+        }
+
+        .cofounder-placeholder {
+            font-size: 70px;
+        }
+
+        .cofounder-name {
+            font-size: 22px;
+        }
+
+        .cofounder-role {
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .cofounder-description {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .cofounder-social {
+            gap: 10px;
+        }
+
+        .cofounder-social a {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .section-title .big-h {
+            font-size: 28px;
+        }
+    }
+
     /* ===== BLOGS SECTION ===== */
     .blog-section {
         background: #fff2eb;
@@ -624,7 +942,7 @@
     
     .big-h { font-family: Poppins, sans-serif; font-size: 40px; font-weight: 800; margin: 10px 0; }
     @media(max-width: 600px) { .big-h { font-size: 28px; } }
-    .muted-center { color: var(--muted); font-size: 15px; max-width: 800px; margin: auto; }
+    .muted-center { color: #555; font-size: 18px; max-width: 800px; margin: auto; font-weight: 500; letter-spacing: 0.2px; }
 
     .about-new-layout {
         max-width: var(--container);
@@ -679,6 +997,68 @@
         line-height: 1.7;
         color: #3a2a3a;
         margin: 0;
+    }
+
+    /* ===== COFOUNDERS SUBSECTION IN ABOUT ===== */
+    .cofounders-subsection {
+        margin-top: 80px;
+        padding-top: 80px;
+        border-top: 1px solid rgba(112, 4, 87, 0.1);
+    }
+
+    .cofounders-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .cofounders-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 1.6px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: var(--accent);
+        margin-bottom: 16px;
+    }
+
+    .cofounders-kicker::before {
+        content: "";
+        width: 36px;
+        height: 2px;
+        background: linear-gradient(90deg, #ffb347, var(--accent));
+        border-radius: 999px;
+        display: inline-block;
+    }
+
+    .cofounders-heading {
+        font-family: 'Davetica', sans-serif;
+        font-size: 40px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        background: linear-gradient(90deg, #1d0b1c, var(--accent));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0 0 16px;
+    }
+
+    .cofounders-subtitle {
+        font-size: 16px;
+        color: #3a2a3a;
+        margin: 0;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    .cofounders-grid {
+        max-width: 1200px;
+        margin: 50px auto 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 45px;
+        align-items: stretch;
     }
     
     .highlight-text {
@@ -2246,7 +2626,82 @@
                     </a>
                 </div>
             </div>
+
+            <!-- ===== COFOUNDERS SUBSECTION ===== -->
+            <div class="cofounders-subsection">
+                <div class="cofounders-title">
+                    <div class="cofounders-kicker">Leadership</div>
+                    <h4 class="cofounders-heading">MEET OUR CO-FOUNDERS</h4>
+                    <p class="cofounders-subtitle">Visionary leaders building India's future of intelligent commerce.</p>
+                </div>
+
+                <div class="cofounders-grid">
+                <!-- Argha Sengupta -->
+                <div class="cofounder-card argha-card">
+                    <div class="cofounder-image-wrapper">
+                        <img src="argha.png" alt="Argha Sengupta - CEO & Founder" loading="lazy" decoding="async" class="cofounder-img" onerror="document.querySelector('.argha-card .cofounder-placeholder').style.display='flex';">
+                        <div class="cofounder-placeholder" style="display:none;">
+                            <i class="ri-user-3-line"></i>
+                        </div>
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="cofounder-content">
+                        <h3 class="cofounder-name">Argha Sengupta</h3>
+                        <p class="cofounder-role">CEO & Founder</p>
+                        <p class="cofounder-description">
+                            Built and led three ventures prior—SBSO Foundation, SRSC Club, and Arventro Group. A business-driven operator with hands-on experience in leadership, execution, operations, marketing, and sales, focused on turning ideas into functioning, scalable ventures.
+                        </p>
+                        <div class="cofounder-social">
+                            <a href="https://www.linkedin.com/in/argha-sengupta" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+                                <i class="ri-linkedin-box-line"></i>
+                            </a>
+                            <a href="https://www.instagram.com/argha_sengupta" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                            <a href="https://x.com/argha_sengupta" target="_blank" rel="noopener noreferrer" title="X (Twitter)" aria-label="X">
+                                <i class="ri-twitter-x-line"></i>
+                            </a>
+                            <a href="https://www.facebook.com/argha.sengupta" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+                                <i class="ri-facebook-box-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chetan Chhetri -->
+                <div class="cofounder-card chetan-card">
+                    <div class="cofounder-image-wrapper">
+                        <div class="cofounder-placeholder">
+                            <i class="ri-user-3-line"></i>
+                        </div>
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="cofounder-content">
+                        <h3 class="cofounder-name">Chetan Chhetri</h3>
+                        <p class="cofounder-role"> CTO & Co-founder </p>
+                        <p class="cofounder-description">
+                            AI-focused software engineer with experience building production-grade systems and machine learning models. Has worked across the full product lifecycle on forecasting, anomaly detection, and scalable web platforms, with a strong focus on execution, efficiency, and real-world impact.
+                        </p>
+                        <div class="cofounder-social">
+                            <a href="https://www.linkedin.com/in/chetan-chhetri" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+                                <i class="ri-linkedin-box-line"></i>
+                            </a>
+                            <a href="https://www.instagram.com/chetan_chhetri" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                            <a href="https://x.com/chetan_chhetri" target="_blank" rel="noopener noreferrer" title="X (Twitter)" aria-label="X">
+                                <i class="ri-twitter-x-line"></i>
+                            </a>
+                            <a href="https://www.facebook.com/chetan.chhetri" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+                                <i class="ri-facebook-box-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
         </section>
+
         <section id="blogs" class="blog-section">
             <div class="section-title">
                 <div class="small-upper">LIFESTYLE & INSIGHTS</div>
