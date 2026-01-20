@@ -2,16 +2,25 @@
 <html lang="en">
 
 <head>
-    <!-- Head: meta tags, preconnects, icons, fonts, and critical inline CSS -->
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://formspree.io https://dialogflow.cloud.google.com; media-src 'self' blob:;">
-  
-  <meta name="google-site-verification" content="N9vuWT9uGs54Yf9-Y_7DtXVS8C2GJlK0mniixKXE654" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="N9vuWT9uGs54Yf9-Y_7DtXVS8C2GJlK0mniixKXE654" />
   <meta name="description" content="Accesco Living - India's unified daily-living ecosystem. Groceries, fashion, food, finance, and rentals in one intelligent app.">
   <meta name="theme-color" content="#fff2eb">
   <title>ACCESCO - Access Everything </title>
+  <meta property="og:type" content="website">
+<meta property="og:url" content="https://accesco.co.in/">
+<meta property="og:title" content="ACCESCO - Access Everything">
+<meta property="og:description" content="India's unified daily-living ecosystem. Groceries, fashion, food, finance, and mobility in one intelligent app.">
+<meta property="og:image" content="https://accesco.co.in/images/accesco_white.png">
 
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://accesco.co.in/">
+<meta property="twitter:title" content="ACCESCO - Access Everything">
+<meta property="twitter:description" content="India's unified daily-living ecosystem.">
+<meta property="twitter:image" content="https://accesco.co.in/images/accesco_white.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -19,20 +28,16 @@
   <link rel="preconnect" href="https://images.unsplash.com">
 
   <link rel="preload" as="image" href="images/poster.jpg" fetchpriority="high">
-
+  <link rel="canonical" href="https://www.accescoliving.com/" />
   <link rel="icon" href="images/accesco.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="images/accesco_chrome.png">
   <link rel="icon" href="images/accesco_original.png" type="image/x-icon">
 
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" media="print" onload="this.media='all'">
      <style>
         /* CRITICAL CSS INLINED (KEPT AS IS) */
         @font-face { font-family: 'Davetica'; src: local('Davetica'), local('Davetica-Regular'), sans-serif; }
@@ -52,6 +57,254 @@
     a { color: inherit; text-decoration: none; }
     img { width: 100%; height: auto; display: block; border-radius: 14px; } 
 
+    /* ===== LOGO FIX ===== */
+    .nav-logo-top {
+        position: fixed;
+        top: 24px;
+        left: 140px; /* Moved right to make space for the menu button */
+        z-index: 10002;
+        width: 40px;
+        height: 40px;
+        filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3)); /* Makes white logo visible on light bg */
+        transition: opacity 0.3s ease;
+    }
+
+    /* ===== SIDEBAR STAGGERED MENU CSS (UPDATED) ===== */
+    /* ===== UPDATED SIDEBAR & 3-LINE ICON ===== */
+    .sm-toggle-custom {
+        position: fixed; top: 24px; left: 24px;
+        z-index: 10003;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.4);
+        border-radius: 999px;
+        padding: 12px 20px;
+        cursor: pointer;
+        display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800;
+        text-transform: uppercase;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    /* ===== UPDATED 3-LINE MENU ICON ===== */
+    .sm-icon-custom { 
+        position: relative; 
+        width: 20px; 
+        height: 14px; 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .sm-line {
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transition: all 0.1s ease; /* Faster icon snap */
+}
+    .sm-panel-list { 
+        list-style: none; 
+        padding: 0; 
+        margin: 0; 
+        flex-grow: 1; 
+        display: flex;
+        flex-direction: column;
+        gap: 35px; /* Significant space between items */
+    }
+    .sm-panel-item {
+        font-size: 2.2rem; /* Larger font size */
+        font-weight: 900; 
+        text-transform: uppercase;
+        color: #1a0014; 
+        display: block; 
+        line-height: 1;
+        transition: all 0.3s ease;
+        letter-spacing: -1px;
+    }
+
+    .sm-panel-item:hover { 
+        color: var(--accent); 
+        transform: translateX(15px); /* More pronounced hover effect */
+    }
+    
+    .sm-socials {
+        margin-top: auto; /* Ensures it stays at the bottom */
+        padding-top: 30px;
+        border-top: 2px solid rgba(0,0,0,0.05);
+    }
+
+    .sm-socials h3 {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+    }
+
+    .sm-social-icons a {
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .sm-social-icons a:hover {
+        color: var(--accent);
+        transform: translateY(-5px);
+    }
+
+    @media (max-width: 600px) {
+        .staggered-menu-panel { padding: 6em 2em 3em 2em; transition: transform 0.2s ease-in-out; }
+        .sm-panel-item { font-size: 2.2rem; gap: 25px; }
+        .sm-social-icons { font-size: 24px; gap: 18px; }
+    }
+
+     /* Simple rotation for close state */
+    .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+    .menu-open .line-2 { opacity: 0; }
+    .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ===== FINAL SIDEBAR STYLES ===== */
+    
+    
+
+    .sm-panel-list { 
+        list-style: none !important; /* Removes the dots/bullets */
+        padding: 0; 
+        margin: 0; 
+        display: flex;
+        flex-direction: column;
+        gap: clamp(15px, 4vh, 30px); /* Responsive spacing */
+    }
+
+    .sm-panel-item {
+        font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+        font-weight: 900; 
+        text-transform: uppercase;
+        color: #1a0014; 
+        display: block; 
+        line-height: 1.1;
+        transition: all 0.01s ease;
+        letter-spacing: -1px;
+        text-decoration: none;
+    }
+
+    .sm-panel-item:hover { 
+        color: var(--accent); 
+        transform: translateX(10px);
+    }
+    
+    .sm-socials {
+        margin-top: auto; /* Sticky to bottom */
+        padding-top: 30px;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .sm-socials h3 {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+        font-weight: 800;
+        color: var(--accent);
+        text-transform: uppercase;
+    }
+
+    .sm-social-icons {
+        display: flex; 
+        gap: 18px; 
+        font-size: 24px; 
+        flex-wrap: wrap;
+    }
+
+    .sm-social-icons a {
+        color: #1a0014;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .sm-social-icons a:hover {
+        color: var(--accent);
+        transform: translateY(-5px);
+    }
+    /* ===== INSTANT & RESPONSIVE SIDEBAR ===== */
+    .staggered-menu-panel {
+        position: fixed; 
+        top: 0; 
+        left: 0;
+        width: clamp(280px, 85vw, 450px); /* Responsive width */
+        height: 100%; 
+        background: white; 
+        padding: 8em 2.5em 3em 2.5em; 
+        z-index: 10001; 
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        box-shadow: 20px 0 60px rgba(0,0,0,0.08);
+        /* TRANSITION REMOVED FOR INSTANT OPENING */
+    }
+    
+    /* Class added via JS to show the panel instantly */
+    .staggered-menu-panel.active {
+        display: flex;
+    }
+
+    .sm-panel-inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .sm-panel-list { 
+        list-style: none !important; /* No bullets */
+        padding: 0; 
+        margin: 0; 
+        display: flex;
+        flex-direction: column;
+        gap: clamp(15px, 4vh, 30px); /* Responsive spacing */
+    }
+
+    .sm-panel-item {
+        font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+        font-weight: 900; 
+        text-transform: uppercase;
+        color: #1a0014; 
+        text-decoration: none;
+    }
+
+    .sm-line {
+        width: 100%;
+        height: 2px;
+        background: currentColor;
+        /* TRANSITION REMOVED FOR INSTANT ICON SNAP */
+    }
+
+    .sm-socials {
+        margin-top: auto;
+        padding-top: 30px;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    /* Mobile-specific adjustments */
+    @media (max-width: 480px) {
+        .staggered-menu-panel { 
+            padding: 6em 1.5em 2em 1.5em; 
+        }
+        .sm-toggle-custom {
+            top: 16px;
+            left: 16px;
+            padding: 10px 16px;
+        }
+    }
+    /* Only highlight when the user actually hovers */
+    .sm-panel-item:hover { 
+        color: var(--accent); 
+        transform: translateX(10px);
+    }
+    
+    .sm-socials {
+        margin-top: auto; /* Keeps socials at the bottom of the screen */
+        padding-top: 30px;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .sm-social-icons {
+        display: flex; 
+        gap: 20px; 
+        font-size: 24px; 
+        flex-wrap: wrap;
+    }
     /* ===== HERO SECTION ===== */
         .hero {
             position: relative;
@@ -78,6 +331,436 @@
       backdrop-filter: blur(1.5px);
       background: rgba(0, 0, 0, 0.3); 
       z-index: 1; 
+    }
+
+    /* ===== COFOUNDERS SECTION ===== */
+    .cofounders-section {
+        background: #fff2eb;
+        padding: 100px 20px;
+        position: relative;
+    }
+
+    .cofounders-grid {
+        max-width: 1200px;
+        margin: 60px auto 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 45px;
+        align-items: stretch;
+    }
+
+    .cofounder-card {
+        background: linear-gradient(180deg, #fff 0%, #f8f6f4 100%);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(112, 4, 87, 0.1), 0 2px 8px rgba(112, 4, 87, 0.06);
+        border: 1.5px solid rgba(112, 4, 87, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cofounder-card:hover {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 0 24px 48px rgba(112, 4, 87, 0.25), 0 12px 24px rgba(112, 4, 87, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        border-color: rgba(112, 4, 87, 0.15);
+    }
+
+    .cofounders-section .section-title {
+        margin-bottom: 20px;
+    }
+
+    .cofounders-section .muted-center {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 1.6px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: var(--accent);
+    }
+
+    .cofounders-section .muted-center::before {
+        content: "";
+        width: 36px;
+        height: 2px;
+        background: linear-gradient(90deg, #ffb347, var(--accent));
+        border-radius: 999px;
+        display: inline-block;
+    }
+
+    .cofounders-section .big-h {
+        font-size: 48px;
+        font-family: 'Davetica', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+    }
+
+    .cofounder-image-wrapper {
+        position: relative;
+        height: 220px;
+        width: 220px;
+        background: linear-gradient(135deg, #ffeae0 0%, #f5d9e8 50%, #ffe8d1 100%);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        border-radius: 50%;
+        border: 5px solid #a01e7d;
+        box-shadow: inset 0 0 20px rgba(160, 30, 125, 0.2), 0 10px 30px rgba(160, 30, 125, 0.15);
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .cofounder-image-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+    }
+
+    .cofounder-card:hover .cofounder-image-wrapper::after {
+        opacity: 1;
+    }
+
+    .cofounder-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+        border-radius: 50%;
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 8px 24px rgba(112, 4, 87, 0.15);
+    }
+
+    .cofounder-card:hover .cofounder-image-wrapper img {
+        transform: scale(1.08);
+    }
+
+    .cofounder-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.12) 0%, rgba(160, 30, 125, 0.1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 100px;
+        color: rgba(112, 4, 87, 0.3);
+        transition: all 0.5s ease;
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(112, 4, 87, 0.15);
+    }
+
+    .cofounder-card:hover .cofounder-placeholder {
+        color: rgba(112, 4, 87, 0.4);
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.12) 0%, rgba(255, 179, 71, 0.08) 100%);
+        mix-blend-mode: multiply;
+        pointer-events: none;
+    }
+
+    .cofounder-content {
+        padding: 28px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex-grow: 1;
+        position: relative;
+    }
+
+    .cofounder-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 32px;
+        right: 32px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(112, 4, 87, 0.1), rgba(112, 4, 87, 0), rgba(112, 4, 87, 0.1));
+    }
+
+    .cofounder-name {
+        font-size: 28px;
+        font-weight: 900;
+        color: #1a0014;
+        margin: 0;
+        letter-spacing: -0.4px;
+        margin-top: 12px;
+        font-family: 'Davetica', sans-serif;
+    }
+
+    .cofounder-role {
+        font-size: 16px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1.8px;
+        background: linear-gradient(90deg, #5a1d5f 0%, #7d2a82 50%, #a01e7d 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+    }
+
+    .cofounder-description {
+        font-size: 16px;
+        color: #3a2a3a;
+        line-height: 1.85;
+        margin: 12px 0 0;
+        font-weight: 500;
+        flex-grow: 1;
+        letter-spacing: 0.25px;
+    }
+
+    .cofounder-social {
+        display: flex;
+        gap: 14px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(112, 4, 87, 0.08);
+        flex-wrap: wrap;
+    }
+
+    .cofounder-social a {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.06), rgba(112, 4, 87, 0.04));
+        color: var(--accent);
+        font-size: 22px;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        border: 1.5px solid rgba(112, 4, 87, 0.1);
+        position: relative;
+    }
+
+    .cofounder-social a::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--accent);
+        border-radius: 12px;
+        opacity: 0;
+        transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: -1;
+    }
+
+    .cofounder-social a:hover {
+        background: linear-gradient(135deg, var(--accent), #a01e7d);
+        color: #fff;
+        transform: translateY(-10px) scale(1.2) rotate(8deg);
+        box-shadow: 0 16px 40px rgba(112, 4, 87, 0.35), 0 10px 20px rgba(112, 4, 87, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+        border-color: var(--accent);
+    }
+
+    .cofounder-social a:active {
+        transform: translateY(-2px) scale(1.08);
+        box-shadow: 0 6px 16px rgba(112, 4, 87, 0.28);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+        .cofounders-grid {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        .cofounder-image-wrapper {
+            height: 340px;
+        }
+
+        .cofounder-content {
+            padding: 36px 28px;
+        }
+
+        .cofounder-name {
+            font-size: 26px;
+        }
+
+        .cofounder-description {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .cofounders-section {
+            padding: 80px 16px;
+        }
+
+        .cofounders-grid {
+            gap: 40px;
+            margin: 40px auto 0;
+        }
+
+        .cofounder-card {
+            border-radius: 16px;
+        }
+
+        .cofounder-image-wrapper {
+            height: 280px;
+            padding: 16px;
+        }
+
+        .cofounder-content {
+            padding: 28px 20px;
+        }
+
+        .cofounder-placeholder {
+            font-size: 70px;
+        }
+
+        .cofounder-name {
+            font-size: 22px;
+        }
+
+        .cofounder-role {
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .cofounder-description {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .cofounder-social {
+            gap: 10px;
+        }
+
+        .cofounder-social a {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .section-title .big-h {
+            font-size: 28px;
+        }
+    }
+
+    /* ===== BLOGS SECTION ===== */
+    .blog-section {
+        background: #fff2eb;
+        padding: 90px 20px;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        max-width: var(--container);
+        margin: 40px auto 0;
+    }
+
+    .blog-card {
+        background: #fff;
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(112, 4, 87, 0.1);
+        border-color: rgba(112, 4, 87, 0.1);
+    }
+
+    .blog-img {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .blog-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0; /* Override global img radius for cards */
+        transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-img img {
+        transform: scale(1.1);
+    }
+
+    .blog-tag {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--accent);
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .blog-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .blog-date {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .blog-content h4 {
+        font-size: 20px;
+        margin: 0 0 12px 0;
+        line-height: 1.4;
+        color: #1a0014;
+    }
+
+    .blog-content p {
+        font-size: 15px;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .blog-link {
+        margin-top: auto;
+        font-weight: 800;
+        font-size: 14px;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: gap 0.2s;
+    }
+
+    .blog-card:hover .blog-link {
+        gap: 12px;
+    }
+
+    @media(max-width: 600px) {
+        .blog-grid { grid-template-columns: 1fr; }
     }
 
     .hero-grid { 
@@ -225,7 +908,7 @@
     }
     
     @media(max-width: 480px) {
-        .hero-title { font-size: 32px; line-height: 1.2; }
+        .hero-title { font-size: 30px; line-height: 1.2; }
         .hero-sub { font-size: 17px; line-height: 1.4; }
         .hero-logo-img { width: 80px; height: 80px; }
         
@@ -259,7 +942,7 @@
     
     .big-h { font-family: Poppins, sans-serif; font-size: 40px; font-weight: 800; margin: 10px 0; }
     @media(max-width: 600px) { .big-h { font-size: 28px; } }
-    .muted-center { color: var(--muted); font-size: 15px; max-width: 800px; margin: auto; }
+    .muted-center { color: #555; font-size: 18px; max-width: 800px; margin: auto; font-weight: 500; letter-spacing: 0.2px; }
 
     .about-new-layout {
         max-width: var(--container);
@@ -314,6 +997,68 @@
         line-height: 1.7;
         color: #3a2a3a;
         margin: 0;
+    }
+
+    /* ===== COFOUNDERS SUBSECTION IN ABOUT ===== */
+    .cofounders-subsection {
+        margin-top: 80px;
+        padding-top: 80px;
+        border-top: 1px solid rgba(112, 4, 87, 0.1);
+    }
+
+    .cofounders-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .cofounders-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 1.6px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: var(--accent);
+        margin-bottom: 16px;
+    }
+
+    .cofounders-kicker::before {
+        content: "";
+        width: 36px;
+        height: 2px;
+        background: linear-gradient(90deg, #ffb347, var(--accent));
+        border-radius: 999px;
+        display: inline-block;
+    }
+
+    .cofounders-heading {
+        font-family: 'Davetica', sans-serif;
+        font-size: 40px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        background: linear-gradient(90deg, #1d0b1c, var(--accent));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0 0 16px;
+    }
+
+    .cofounders-subtitle {
+        font-size: 16px;
+        color: #3a2a3a;
+        margin: 0;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    .cofounders-grid {
+        max-width: 420px;
+        margin: 50px auto 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 45px;
+        align-items: stretch;
     }
     
     .highlight-text {
@@ -443,7 +1188,7 @@
     .card-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.2px; background: #fff3e0; color: #d35400; border: 1px solid rgba(211,84,0,0.22); }
     .card-sub { margin: 0; color: #444; font-size: 14px; line-height: 1.45; }
     .card-meta { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 800; color: #222; }
-    .meta-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; border-radius: 9px; background: #f5f5f5; border: 1px solid rgba(0,0,0,0.05); }
+    .meta-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; border-radius: 999px; background: #f5f5f5; border: 1px solid rgba(0,0,0,0.05); }
     .meta-chip i { color: #ff7a00; }
     
     .card-footer { 
@@ -789,8 +1534,6 @@
         .arena-features { align-items: center; }
         .games-grid-clean { grid-template-columns: repeat(2, 1fr); gap: 16px; }
         .arena-title { font-size: 36px; }
-        .console-body { grid-template-columns: 1fr; }
-        .console-screen { height: 120px; }
         .arena-right { gap: 14px; }
     }
     @media(max-width: 500px) {
@@ -798,8 +1541,6 @@
             grid-template-columns: repeat(2, 1fr) !important; 
             gap: 12px;
         }
-        .console-doodle { padding: 14px 14px 12px; }
-        .console-screen { height: 110px; }
         .game-card-new {
             padding: 16px 10px;
         }
@@ -1178,7 +1919,6 @@
             .hero-title { font-size: 30px; }
             .hero-sub { font-size: 17px; }
             .cta-pill { padding: 10px 18px; font-size: 13px; }
-            .badge h3 { font-size: 22px !important; }
             .gaming-arena { gap: 28px; }
             .app-container { gap: 26px; }
             .contact-card { padding: 38px 18px; }
@@ -1336,46 +2076,192 @@
         object-fit: cover;
         display: block;
         }
-        
-        df-messenger {
-            --df-messenger-titlebar-background: #000000;
-            --df-messenger-titlebar-font-color: #ffffff;
-            --df-messenger-button-titlebar-color: #000000;
-            --df-messenger-chat-background-color: #000000;
-            --df-messenger-message-bot-background: #1f2933;
-            --df-messenger-message-bot-font-color: #ffffff;
-            --df-messenger-message-user-background: #2563eb;
-            --df-messenger-message-user-font-color: #ffffff;
-            --df-messenger-input-box-background: #000000;
-            --df-messenger-input-font-color: #000000;
-            --df-messenger-input-placeholder-font-color: #606266;
-            --df-messenger-send-icon-color: #ffffff;
-            width: 360px;
-            max-width: 95%;
-            height: 480px;
-            border-radius: 16px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-        }
-        @media (max-width: 480px) {
-            df-messenger {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            }
-        }
     </style>
 
-        <!-- MAIN CONTENT START -->
 
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://accesco.co.in/#organization",
+      "name": "Accesco Living Private Limited",
+      "url": "https://accesco.co.in/",
+      "logo": "https://accesco.co.in/assets/logo.png",
+      "description": "Accesco Living Private Limited is an intelligent commerce company in India integrating groceries, food delivery, dining, fashion, mobility, and expense planning into a unified digital ecosystem for everyday living.",
+      "foundingLocation": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/accesco-living",
+        "https://www.instagram.com/accesco.living"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://accesco.co.in/#website",
+      "url": "https://accesco.co.in/",
+      "name": "Accesco Living",
+      "inLanguage": "en-IN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://accesco.co.in/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://accesco.co.in/#localbusiness",
+      "name": "Accesco Living",
+      "url": "https://accesco.co.in/",
+      "telephone": "+91-9900384517",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Bengaluru" },
+        { "@type": "City", "name": "Mumbai" },
+        { "@type": "City", "name": "Delhi" },
+        { "@type": "City", "name": "Hyderabad" },
+        { "@type": "City", "name": "Pune" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://accesco.co.in/#grocery",
+      "name": "Online Grocery and Daily Essentials Delivery",
+      "description": "Digital grocery and daily essentials service designed for Indian households with focus on reliability, planning, and convenience.",
+      "provider": { "@id": "https://accesco.co.in/#organization" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://accesco.co.in/#food",
+      "name": "Online Food Delivery Service",
+      "description": "Food ordering and delivery service connecting users with local kitchens and restaurants for reliable everyday meals.",
+      "provider": { "@id": "https://accesco.co.in/#organization" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://accesco.co.in/#dining",
+      "name": "Dining Discovery and Experience Platform",
+      "description": "Platform enabling users to discover dining options, plan outings, and access curated dining experiences.",
+      "provider": { "@id": "https://accesco.co.in/#organization" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://accesco.co.in/#fashion",
+      "name": "On-Demand Fashion and Lifestyle Delivery",
+      "description": "Quick access to fashion and lifestyle products with personalised selection and doorstep delivery.",
+      "provider": { "@id": "https://accesco.co.in/#organization" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://accesco.co.in/#mobility",
+      "name": "Mobility and Local Logistics Service",
+      "description": "Urban mobility and parcel movement service supporting daily transportation and local logistics needs.",
+      "provider": { "@id": "https://accesco.co.in/#organization" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://accesco.co.in/#expenseplanning",
+      "name": "Intelligent Expense Planning and Insights",
+      "description": "Digital expense planning and spending insights to help users understand and manage monthly consumption.",
+      "provider": { "@id": "https://accesco.co.in/#organization" },
+      "areaServed": { "@type": "Country", "name": "India" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://accesco.co.in/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What services does Accesco Living provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Accesco Living provides integrated services including groceries, food delivery, dining discovery, fashion access, mobility, and expense planning through a single intelligent ecosystem."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Accesco Living available in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Accesco Living is designed for Indian consumers and operates across multiple cities in India."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Accesco Living offer grocery delivery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Accesco Living supports online grocery and daily essentials delivery with a focus on reliability and planning."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+ 
+
+
+    <body>
+
+        <button class="sm-toggle-custom" id="smToggle">
+            <div class="sm-icon-custom" id="smIcon">
+                <div class="sm-line line-1"></div>
+                <div class="sm-line line-2"></div>
+                <div class="sm-line line-3"></div>
+            </div>
+            <span id="smToggleText">Menu</span>
+        </button>
+
+    <aside class="staggered-menu-panel" id="smPanel">
+    <div class="sm-panel-inner">
+        <ul class="sm-panel-list">
+            <li><a href="#home" class="sm-panel-item">Home</a></li>
+            <li><a href="#services" class="sm-panel-item">Services</a></li>
+            <li><a href="#" class="sm-panel-item">Wallet</a></li>
+            <li><a href="#" class="sm-panel-item">Transactions</a></li>
+            <li><a href="#blogs" class="sm-panel-item">Blogs</a></li>
+            <li><a href="#contact-form" class="sm-panel-item">Contact</a></li>
+        </ul>
+
+        <div class="sm-socials">
+            <h3>Follow Accesco</h3>
+            <div class="sm-social-icons">
+                <a href="https://www.instagram.com/accescoliving" target="_blank"><i class="ri-instagram-line"></i></a>
+                <a href="https://www.linkedin.com/company/acceso-living/" target="_blank"><i class="ri-linkedin-box-line"></i></a>
+                <a href="https://x.com/accesco_living" target="_blank"><i class="ri-twitter-x-line"></i></a>
+                <a href="https://www.facebook.com/accescoliving" target="_blank"><i class="ri-facebook-box-line"></i></a>
+                <a href="https://www.youtube.com/@accescoliving" target="_blank"><i class="ri-youtube-line"></i></a>
+                <a href="https://www.threads.net/@accescoliving" target="_blank"><i class="ri-threads-line"></i></a>
+            </div>
+        </div>
+    </div>
+</aside>
         <main id="home">
-        <!-- ===== HERO / HEADER SECTION ===== -->
-    <section class="hero">
+        <section class="hero">
   <div class="top-nav">
 
-    <!-- AUTH AREA -->
     <div id="authContainer">
 
-      <!-- LOGIN BUTTON (VISIBLE BY DEFAULT) -->
       <button
         id="navLoginBtn"
         class="nav-login-btn"
@@ -1386,7 +2272,6 @@
         </button>
 
 
-      <!-- USER PROFILE (HIDDEN UNTIL LOGIN) -->
       <div id="navProfileWrapper" style="display:none; position:relative;">
 
         <img
@@ -1397,7 +2282,6 @@
           onclick="toggleProfilePopup()"
         />
 
-        <!-- PROFILE POPUP -->
         <div id="profilePopup" class="profile-popup">
           <a href="dashboard.html">Dashboard</a>
           <a href="settings.html">Account Settings</a>
@@ -1410,7 +2294,6 @@
 
   </div>
 
-  <!-- HERO BACKGROUND -->
   <video
     class="hero-bg-video"
     autoplay
@@ -1425,6 +2308,7 @@
 
   <div class="hero-grid">
     <img
+      loading="lazy"
       src="images/accesco_white.png"
       class="hero-logo-img"
       alt="Accesco Logo"
@@ -1447,12 +2331,14 @@
     <div class="hero-app-buttons">
       <a href="#" class="app-btn-link">
         <img
+            loading="lazy"
           src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
           alt="Get it on Google Play"
         >
       </a>
       <a href="#" class="app-btn-link">
         <img
+        loading="lazy"
           src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
           alt="Download on the App Store"
         >
@@ -1465,8 +2351,6 @@
     </a>
   </div>
 </section>
-<!-- ===== END: HERO / HEADER SECTION ===== -->
-
 <style>
 /* ===== NAV PROFILE ===== */
 .nav-profile-img {
@@ -1508,8 +2392,8 @@
   background: #f5f5f5;
 }
 </style>
+        
 
-        <!-- ===== SERVICES CARDS ===== -->
         <section id="services">
             <div class="section-title">
                 <div class="small-upper">OUR SERVICES</div>
@@ -1540,7 +2424,7 @@
 
                 <a href="services-swadisht.html" class="card">
                     <div class="card-img swadisht-bg">
-                        <img src="images/swadisht_logo.JPG" alt="Swadisht Logo" width="300" height="200" loading="lazy" decoding="async">
+                        <img src="images/swadisht_logo.JPG" alt="Swadisht Logo" width="300" height="200" loading="lazy" loading="lazy" decoding="async">
                     </div>
                     <div class="card-body">
                         <div class="card-title-row">
@@ -1613,9 +2497,6 @@
                 </a>
             </div>
         </section>
-        <!-- ===== END: SERVICES CARDS ===== -->
-
-        <!-- ===== CALCIQ (FINANCE / WIDGET) ===== -->
         <section class="calciq-section">
             <div class="calciq-container">
                 <div class="calciq-info">
@@ -1643,9 +2524,6 @@
                 </div>
             </div>
         </section>
-        <!-- ===== END: CALCIQ (FINANCE / WIDGET) ===== -->
-
-        <!-- ===== GAMING / REWARD ARENA ===== -->
         <section class="gaming-arena">
             <div class="floating-bits" aria-hidden="true">
                 <span class="bit b1"></span>
@@ -1663,14 +2541,14 @@
                     <li><i class="ri-coupon-3-line"></i> Win Real Coupons</li>
                 </ul>
 
-                <button class="play-btn-main">Start Playing Now <i class="ri-arrow-right-line"></i></button>
+                <a href="game.html"><button class="play-btn-main">Start Playing Now <i class="ri-arrow-right-line"></i></button></a>
             </div>
 
             <div class="arena-right">
                 <div class="games-grid-clean">
-                    <a href="#" class="game-card-new">
+                    <a href="bird/index.html" class="game-card-new">
                         <div class="game-icon-box">
-                            <img src="img/spin.png" alt="Spin Game" width="40" height="40" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="img/spin.png" loading="lazy" alt="Spin Game" width="40" height="40" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <i class="ri-loop-right-line" style="display:none; font-size:30px"></i>
                         </div>
                         <h4>Flappy bird</h4>
@@ -1688,7 +2566,7 @@
                         <div class="play-hover">PLAY NOW →</div>
                     </a>
 
-                    <a href="#" class="game-card-new">
+                    <a href="game/cards/card.html" class="game-card-new">
                         <div class="game-icon-box">
                             <img src="img/cardmatch.png" alt="Card Match" width="40" height="40" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <i class="ri-grid-fill" style="display:none; font-size:30px"></i>
@@ -1710,9 +2588,6 @@
                 </div>
             </div>
         </section>
-        <!-- ===== END: GAMING / REWARD ARENA ===== -->
-
-        <!-- ===== ABOUT / MISSION ===== -->
         <section id="about">
             <div class="section-title">
                 <div class="small-upper">ABOUT ACCESCO</div>
@@ -1751,11 +2626,105 @@
                     </a>
                 </div>
             </div>
-        </section>
-        <!-- ===== END: ABOUT / MISSION ===== -->
 
-        <!-- ===== APP SHOWCASE / FEATURES ===== -->
-        <section class="app-showcase">
+            <!-- ===== COFOUNDERS SUBSECTION ===== -->
+            <div class="cofounders-subsection">
+                <div class="cofounders-title">
+                    <div class="cofounders-kicker">Leadership</div>
+                    <h4 class="cofounders-heading">MEET OUR CO-FOUNDERS</h4>
+                    <p class="cofounders-subtitle">Visionary leaders building India's future of intelligent commerce.</p>
+                </div>
+
+                <div class="cofounders-grid">
+                <!-- Argha Sengupta -->
+                <div class="cofounder-card argha-card">
+                    <div class="cofounder-image-wrapper">
+                        <img src="argha.png" alt="Argha Sengupta - CEO & Founder" loading="lazy" decoding="async" class="cofounder-img" onerror="document.querySelector('.argha-card .cofounder-placeholder').style.display='flex';">
+                        <div class="cofounder-placeholder" style="display:none;">
+                            <i class="ri-user-3-line"></i>
+                        </div>
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="cofounder-content">
+                        <h3 class="cofounder-name">Argha Sengupta</h3>
+                        <p class="cofounder-role">CEO & Founder</p>
+                        <p class="cofounder-description">
+                            Built and led three ventures prior—SBSO Foundation, SRSC Club, and Arventro Group. A business-driven operator with hands-on experience in leadership, execution, operations, marketing, and sales, focused on turning ideas into functioning, scalable ventures.
+                        </p>
+                        <div class="cofounder-social">
+                            <a href="https://www.linkedin.com/in/argha-sengupta" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+                                <i class="ri-linkedin-box-line"></i>
+                            </a>
+                            <a href="https://www.instagram.com/argha_sengupta" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                            <a href="https://x.com/argha_sengupta" target="_blank" rel="noopener noreferrer" title="X (Twitter)" aria-label="X">
+                                <i class="ri-twitter-x-line"></i>
+                            </a>
+                            <a href="https://www.facebook.com/argha.sengupta" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+                                <i class="ri-facebook-box-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section id="blogs" class="blog-section">
+            <div class="section-title">
+                <div class="small-upper">LIFESTYLE & INSIGHTS</div>
+                <h3 class="big-h">The Accesco Edit</h3>
+                <p class="muted-center">Your guide to intelligent living, from financial hacks to the latest in sustainable fashion.</p>
+            </div>
+
+            <div id="dynamicBlogGrid" class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <span class="blog-tag">Innovation</span>
+                        <img src="BLOGS_PAGE/Blogs_assets/download (1).jpg" alt="Grokly Smart Grocery">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date"><i class="ri-calendar-line"></i> 12 Jan 2026</div>
+                        <h4>Grokly: India’s Smart Grocery Delivery System That Runs Your Household Automatically</h4>
+                        <p>Discover how Grokly uses intelligent automation to manage your pantry and ensure you never run out of essentials.</p>
+                        <a href="BLOGS_PAGE/blogs.html" class="blog-link">Read Article <i class="ri-arrow-right-line"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <span class="blog-tag">Our Story</span>
+                        <img src="BLOGS_PAGE/Blogs_assets/download (2).png" alt="Accesco Living Story">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date"><i class="ri-calendar-line"></i> 05 Jan 2026</div>
+                        <h4>Accesco Living: A Story That Started Long Before the Company</h4>
+                        <p>Step behind the scenes of the vision that built India's first daily-living ecosystem for the modern consumer.</p>
+                        <a href="BLOGS_PAGE/blogs.html" class="blog-link">Read Article <i class="ri-arrow-right-line"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <span class="blog-tag">Lifestyle</span>
+                        <img src="BLOGS_PAGE/Blogs_assets/download.jpg" alt="Life with Accesco">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date"><i class="ri-calendar-line"></i> 01 Jan 2026</div>
+                        <h4>A Day With Accesco Living: How Life Changes When Everything Works Together</h4>
+                        <p>Explore how a unified ecosystem of groceries, fashion, and finance streamlines every part of your routine.</p>
+                        <a href="BLOGS_PAGE/blogs.html" class="blog-link">Read Article <i class="ri-arrow-right-line"></i></a>
+                    </div>
+                </article>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="BLOGS_PAGE/blogs.html" class="cta-pill" style="display: inline-block; text-decoration: none; color: black; border: 2px solid black; background: transparent;">View All Posts</a>
+            </div>
+        </section>
+
+            <section class="app-showcase">
             <div class="app-header">
                 <h2>The Ecosystem. Unlocked.</h2>
                 <p>Powering a Smart Ecosystem That Simplifies Everyday Living.</p>
@@ -1820,7 +2789,7 @@
                         </div>
                     </a>
                     <a href="services.html" class="gen-z-card accesgo">
-                        <div class="icon-container"><i class="ri-route-line"></i></div>
+                        <div class="icon-container"><i class="ri-heart-pulse-line"></i></div>
                         <div>
                             <h4>AccesGO</h4>
                             <p>On-demand mobility & drops</p>
@@ -1836,9 +2805,6 @@
                 </div>
             </div>
         </section>
-        <!-- ===== END: APP SHOWCASE / FEATURES ===== -->
-
-        <!-- ===== DOWNLOAD CTA ===== -->
         <section class="download-section">
             <div class="download-card">
                 <div class="download-text">
@@ -1861,66 +2827,46 @@
                 </div>
             </div>
         </section>
-        <!-- ===== END: DOWNLOAD CTA ===== -->
-
-        <!-- ===== CONTACT FORM / SUPPORT ===== -->
         <section id="contact-form" class="contact-section">
-            <div class="contact-card">
-                <div class="contact-glow"></div>
-                <div class="contact-gridlines"></div>
-                <div class="contact-inner">
-                    <div class="contact-header">
-                        <span class="contact-badge"><i class="ri-sparkling-2-fill"></i>Assistance</span>
-                        <h2><span class="contact-title-gold">Need Help?</span> We've Got You.</h2>
-                        <p>Tell us what you need orders, dining, rentals, finance, or product support and a concierge will respond within 2 hours with clear next steps.</p>
-                        <div class="contact-meta">
-                            <span class="info-chip"><i class="ri-time-line"></i> Avg. reply: 2 hrs</span>
-                            <span class="info-chip"><i class="ri-shield-check-line"></i> Secure & private</span>
-                            <span class="info-chip"><i class="ri-chat-1-line"></i> Live follow-ups</span>
-                        </div>
-                    </div>
+    <div class="contact-card">
+        <div class="contact-header">
+            <span class="contact-badge">Concierge Support</span>
+            <h2>How can we assist you?</h2>
+            <p>Our team is ready to help with orders, dining reservations, or technical support.</p>
+        </div>
 
-                    <div class="contact-ribbon">
-                        <div class="ribbon-pill"><i class="ri-star-smile-line"></i>Personalised fixes for your issue</div>
-                        <div class="ribbon-pill"><i class="ri-flashlight-fill"></i>Same-day action on most requests</div>
-                        <div class="ribbon-pill"><i class="ri-shield-keyhole-line"></i>Private, compliant handoff</div>
-                    </div>
-
-                    <form action="https://formspree.io/f/mdaojdag" method="POST" class="form-grid">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" class="form-control" rows="5" placeholder="How can we help you?" required></textarea>
-                        </div>
-
-                        <div class="form-group full-width" style="text-align: center;">
-                            <button type="submit" class="submit-btn">
-                                <span class="btn-blur"></span>
-                                <span class="btn-text"><i class="ri-send-plane-2-fill"></i> Send Message</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+        <form action="https://formspree.io/f/mdaojdag" method="POST" class="form-grid">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Rahul Sharma" required>
             </div>
-        </section>
 
-        <!-- ===== FOOTER / CONTACT INFO ===== -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="name@email.com" required>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Please describe your request in detail..." required></textarea>
+            </div>
+
+            <div class="form-group full-width" style="text-align: center; margin-top: 10px;">
+                <button type="submit" class="submit-btn">
+                    <span>Send Inquiry</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
         <footer id="contact">
             <div class="footer-grid">
                 <div>
                     <div style="display:flex;gap:14px;align-items:center">
                         <div class="logo" style="width:110px;height:110px;font-size:18px"><img src="images/accesco_white.png" alt="Accesco Logo" width="110" height="110" loading="lazy" decoding="async"></div>
                         <div>
-                            <div style="font-weight:800;color: white; font-size: 24px;">ACCESCO</div>
+                            <div style="font-weight:800;color: white; font-size: 24px;">ACCESCO LIVING</div>
                             <div style="color:var(--muted);margin-top:6px; max-width: 250px;">Empowering digital excellence through innovative solutions.</div>
                         </div>
                     </div>
@@ -1930,9 +2876,9 @@
                     <h4 style="color: white; letter-spacing: 1px;">COMPANY</h4>
                     <ul style="list-style:none;margin:0;padding:0;color:var(--muted);margin-top:14px;font-size:15px; line-height: 2;">
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Partner With Us</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="https://www.linkedin.com/company/acceso-living/">Careers</a></li>
+                        <li><a href="partner.html">Partner With Us</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
                     </ul>
                 </div>
 
@@ -1940,8 +2886,8 @@
                     <h4 style="color: white; letter-spacing: 1px;">RESOURCES</h4>
                     <ul style="list-style:none;margin:0;padding:0;color:var(--muted);margin-top:14px;font-size:15px; line-height: 2;">
                         <li><a href="#">Metrics & Certificates</a></li>
-                        <li><a href="#">QTC Videos</a></li>
-                        <li><a href="#" id="blog-link">Blogs</a></li>
+                        <li><a href="QTC/QTC.html">QTC Videos</a></li>
+                        <li><a href="BLOGS_PAGE/blogs.html" id="blog-link">Blogs</a></li>
                         <li><a href="#">Help & Support</a></li>
                     </ul>
                 </div>
@@ -1950,9 +2896,10 @@
                     <h4 style="color: white; letter-spacing: 1px;">SOCIAL LINKS</h4>
                     <div class="social-links">
                         <a href="https://www.instagram.com/accescoliving?igsh=MWI5dHBuOTB4Nm1uYQ==" target="_blank" class="social-icon" aria-label="Instagram" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://x.com/accesco_living?s=21" target="_blank" class="social-icon" aria-label="Twitter" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://x.com/accesco_living?s=21" target="_blank" class="social-icon" aria-label="X" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
                         <a href="https://www.youtube.com/@accescoliving" target="_blank" class="social-icon" aria-label="YouTube" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
                         <a href="https://www.linkedin.com/company/acceso-living/" target="_blank" class="social-icon" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.threads.net/@accescoliving" target="_blank" class="social-icon" aria-label="Threads" rel="noopener noreferrer"><i class="ri-threads-line"></i></a>
                     </div>
 
                     <div class="app-buttons">
@@ -1966,7 +2913,6 @@
         </footer>
     </main>
     
-    <!-- ===== LOGIN MODAL OVERLAY ===== -->
     <div id="loginOverlay" class="login-overlay">
     <div class="login-modal">
         <button class="close-login" onclick="closeLoginModal()">&times;</button>
@@ -1994,7 +2940,6 @@
     </div>
 </div>
 
-    <!-- ===== PROFILE / USER OVERLAY ===== -->
     <div id="profileOverlay" class="login-overlay">
         <div class="login-modal">
             <button class="close-login" onclick="closeProfileModal()">&times;</button>
@@ -2023,7 +2968,6 @@
         </div>
     </div>
 
-    <!-- ===== SCRIPTS: UI INTERACTIONS (stack swipe, button effects, modals) ===== -->
     <script>
         const stack = document.getElementById('stack');
         const cards = Array.from(stack.querySelectorAll('.stack-card'));
@@ -2175,20 +3119,64 @@
     </script>
     
 
-    <!-- ===== EXTERNAL INTEGRATIONS: Supabase auth & session checks ===== -->
     <script type="module">
 /* ======================================================
    SUPABASE SETUP
 ====================================================== */
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const supabase = createClient(
-  "https://nfdrnbikwzfmijrqmoqt.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5mZHJuYmlrd3pmbWlqcnFtb3F0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwNzAyNjYsImV4cCI6MjA4MTY0NjI2Nn0.u4ThkmfWiCOJrfcxm0RB-oaVysQ5Y8kha7k66UdUuH0"
-);
+const supabaseUrl = "https://nfdrnbikwzfmijrqmoqt.supabase.co";
+const supabaseKey = "sb_publishable_dVvOYAqamp2BGoI8zvyB5g_NfCSkQ6b";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 /* ======================================================
-   DOM ELEMENTS
+   DYNAMIC BLOG FETCH (DISABLED FOR HARDCODED CONTENT)
+====================================================== */
+/* async function fetchHomeBlogs() {
+    const blogContainer = document.getElementById('dynamicBlogGrid');
+    try {
+        const { data: blogs, error } = await supabase
+            .from('blogs')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(3);
+
+        if (error) throw error;
+
+        if (blogs && blogs.length > 0) {
+            blogContainer.innerHTML = blogs.map(post => {
+                const dateStr = new Date(post.created_at).toLocaleDateString('en-IN', { 
+                    day: 'numeric', 
+                    month: 'short', 
+                    year: 'numeric' 
+                });
+                return `
+                <article class="blog-card">
+                    <div class="blog-img">
+                        <span class="blog-tag">${post.category || 'Lifestyle'}</span>
+                        <img src="${post.image_url || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800'}" alt="${post.title}">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date"><i class="ri-calendar-line"></i> ${dateStr}</div>
+                        <h4>${post.title}</h4>
+                        <p>${post.content.substring(0, 100)}...</p>
+                        <a href="BLOGS_PAGE/blogs.html" class="blog-link">Read Article <i class="ri-arrow-right-line"></i></a>
+                    </div>
+                </article>`;
+            }).join('');
+        } else {
+            blogContainer.innerHTML = '<p style="color: var(--muted);">No current highlights found.</p>';
+        }
+    } catch (err) {
+        console.error("Home blog fetch failed:", err);
+        blogContainer.innerHTML = '<p style="color: var(--muted);">Unable to load latest insights.</p>';
+    }
+}
+window.addEventListener('DOMContentLoaded', fetchHomeBlogs);
+*/
+
+/* ======================================================
+   DOM ELEMENTS (AUTH)
 ====================================================== */
 const loginOverlay = document.getElementById("loginOverlay");
 const navLoginBtn = document.getElementById("navLoginBtn");
@@ -2197,7 +3185,7 @@ const navProfileImg = document.getElementById("navProfileImg");
 const profilePopup = document.getElementById("profilePopup");
 
 /* ======================================================
-   UI HELPERS
+   UI HELPERS (AUTH)
 ====================================================== */
 function showLoggedInUI(user) {
   if (navLoginBtn) navLoginBtn.style.display = "none";
@@ -2283,68 +3271,121 @@ document.addEventListener("click", (e) => {
 });
 </script>
 
-<!-- ===== EXTERNAL CHAT INTEGRATION: Dialogflow Messenger ===== -->
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const smToggle = document.getElementById('smToggle');
+    const smPanel = document.getElementById('smPanel');
+    const smIcon = document.getElementById('smIcon');
+    const smText = document.getElementById('smToggleText');
     
+    let isMenuOpen = false;
+
+    smToggle.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+
+        // Toggle visibility instantly
+        smPanel.classList.toggle('active');
+        smIcon.classList.toggle('menu-open');
+
+        if (isMenuOpen) {
+            smToggle.style.color = "#000";
+            smToggle.style.background = "#fff";
+            smText.innerText = "Close";
+        } else {
+            smToggle.style.color = "#fff";
+            smToggle.style.background = "rgba(255, 255, 255, 0.2)";
+            smText.innerText = "Menu";
+        }
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.sm-panel-item').forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMenuOpen) smToggle.click();
+        });
+    });
+});
+</script>
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ACCESCO",
+    "url": "https://www.accescoliving.com/",
+    "logo": "https://accesco.co.in/images/accesco_white.png",
+    "sameAs": [
+      "https://www.facebook.com/Accesco-Living-110022318042293",
+      "https://www.instagram.com/accescoliving",
+      "https://www.linkedin.com/company/acceso-living/",
+      "https://x.com/accesco_living",
+      "https://www.youtube.com/@accescoliving",
+      "https://www.threads.net/@accescoliving"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+919900384517",
+      "contactType": "customer service"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ACCESCO - Access Everything",
+    "url": "https://www.accescoliving.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.accescoliving.com/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Accesco Living",
+    "image": "https://accesco.co.in/images/accesco_white.png",
+    "telePhone": "+919900384517",
+    "priceRange": "INR",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Update with your building/street",
+      "addressLocality": "Update City",
+      "addressRegion": "Update State",
+      "postalCode": "Update PIN",
+      "addressCountry": "IN"
+    },
+    "openingHours": "Mo-Su 00:00-23:59"
+  }
+]
+</script>
+      
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1" defer></script>
 <style>
+
   df-messenger {
     /* --- Main Branding --- */
     --df-messenger-font-family: 'Outfit', sans-serif;
-    --df-messenger-titlebar-background: #700457;
-    --df-messenger-titlebar-font-color: #ffffff;
+    /* 1. Change title background to a light color (like your image) or keep it dark */
+    --df-messenger-titlebar-background: #efefef; 
+
+    --df-messenger-button-titlebar-font-color: #000000;
+  
+    /* General font color fallback */
+    --df-messenger-font-color: #000000;
+    
+    /* 2. CHANGE THIS TO BLACK */
+    --df-messenger-titlebar-font-color: #000000; 
     
     /* --- Launcher Settings --- */
-    --df-messenger-button-titlebar-color: transparent !important; /* Force transparency */
-    --df-messenger-chat-background-color: #0f172a;
+    --df-messenger-button-titlebar-color: transparent !important;
+    --df-messenger-chat-background-color: #1d2856;
   }
-
-  /* --- 🔑 FORCE TRANSPARENCY & INCREASE SIZE --- */
-  /* This targets the button container inside the Shadow DOM */
-  df-messenger >>> .df-messenger-wrapper .launcher {
-    background-color: transparent !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    width: 110px !important; /* Larger container for the large icon */
-    height: 110px !important;
-  }
-
-  /* This targets the icon image itself */
-  df-messenger >>> .df-messenger-wrapper .launcher img {
-    width: 90px !important; /* Increased size */
-    height: 90px !important;
-    max-width: none !important; /* Removes default size limits */
-    max-height: none !important;
-    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3)); /* Adds depth without a solid box */
-  }
-
-  /* --- Optional: Adjust position to prevent clipping --- */
-  df-messenger >>> .df-messenger-wrapper {
-    bottom: 20px !important;
-    right: 20px !important;
-  }
-    @media (max-width: 480px) {
-        /* Scale down the login button seen in image_745036.png */
-        .login-btn {
-            transform: scale(0.8);
-            margin-right: 10px;
-            z-index: 5 !important;
-        }
-
-        /* scale down and reposition large chatbot launcher from image_73dbf6.png */
-        df-messenger >>> .df-messenger-wrapper .launcher {
-            width: 60px !important;
-            height: 60px !important;
-            bottom: 15px !important;
-            right: 15px !important;
-        }
-
-        df-messenger >>> .df-messenger-wrapper .launcher img {
-            width: 45px !important;
-            height: 45px !important;
-        }
-    }
 </style>
+
 <df-messenger
     intent="WELCOME"
     chat-title="ACCESCO AI"
@@ -2353,4 +3394,48 @@ document.addEventListener("click", (e) => {
     chat-icon="https://github.com/accescoliving-tech/ACCESCO-Living-/blob/main/images/IMG_5111.PNG?raw=true">
 </df-messenger>
 
+<script>
+  const dfMessenger = document.querySelector('df-messenger');
 
+  // 1. Listen for the 'df-messenger-opened' event
+  dfMessenger.addEventListener('df-messenger-opened', () => {
+    // 2. Small timeout ensures internal Shadow DOM components are rendered
+    setTimeout(() => {
+      const chat = dfMessenger.shadowRoot?.querySelector('df-messenger-chat');
+      const titlebar = chat?.shadowRoot?.querySelector('df-messenger-titlebar');
+      const header = titlebar?.shadowRoot?.querySelector('header');
+
+      if (header && !header.querySelector('.custom-back-btn')) {
+        // 3. Create the button
+        const backBtn = document.createElement('button');
+        backBtn.className = 'custom-back-btn';
+        backBtn.innerHTML = '←';
+        
+        // 4. Match your bright UI theme
+        backBtn.style.cssText = `
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: #000000;
+          padding: 0 12px 0 4px;
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+        `;
+
+        // 5. Close the chat on click
+        backBtn.onclick = (e) => {
+          e.stopPropagation(); // Prevent titlebar events
+          dfMessenger.opened = false;
+        };
+
+        // 6. Insert at the very start of the header
+        header.prepend(backBtn);
+      }
+    }, 100);
+  });
+</script>
+
+</body>
+</html>

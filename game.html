@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESCO - Reward Play Arena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap');
+        
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0b0e; color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        .heading-font { font-family: 'Orbitron', sans-serif; }
+
+        #video-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2; object-fit: cover;
+            filter: brightness(0.2) contrast(1.2);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .banner-gradient { background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%); }
+
+        .glass-nav {
+            background: rgba(12, 11, 14, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .game-card { transition: transform 0.2s ease-in-out, opacity 0.3s ease; }
+        .game-card:active { transform: scale(0.96); }
+        .game-card.hidden { display: none; }
+        .hidden-section { display: none !important; }
+
+        .category-pill {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .category-pill.active {
+            background: #fbbf24; color: #000; border-color: #fbbf24;
+        }
+
+        .reward-badge {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: #000; font-weight: 800;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-24">
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-fast-motion-light-trails-34533-large.mp4" type="video/mp4">
+    </video>
+
+    <header class="glass-nav sticky top-0 z-50 px-4 py-4">
+        <div class="max-w-4xl mx-auto flex flex-col space-y-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="map-pin" class="text-amber-500 w-5 h-5"></i>
+                    <span class="text-sm font-bold border-b-2 border-white">Arena Zone 1</span>
+                </div>
+                <div id="user-profile-icon" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-white/10 overflow-hidden">
+                    <i data-lucide="user" class="w-5 h-5 text-slate-400"></i>
+                </div>
+            </div>
+            <div class="relative group">
+                <input type="text" placeholder="Search for games or rewards" class="w-full bg-slate-900/50 border border-white/5 py-3 px-10 rounded-xl text-sm focus:outline-none">
+                <i data-lucide="search" class="absolute left-3 top-3.5 w-4 h-4 text-slate-500"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="arena-section" class="max-w-4xl mx-auto px-4 mt-6 tab-content">
+        <section class="mb-8 sticky top-[138px] z-40 bg-[#0c0b0e]/50 backdrop-blur-md py-2 -mx-4 px-4 overflow-x-auto no-scrollbar flex space-x-3">
+            <button class="filter-btn category-pill active px-4 py-2 rounded-full text-xs font-bold" data-filter="all">All Games</button>
+            <button class="filter-btn category-pill px-4 py-2 rounded-full text-xs font-bold" data-filter="popular">Most Popular</button>
+            <button class="filter-btn category-pill px-4 py-2 rounded-full text-xs font-bold" data-filter="action">Action</button>
+            <button class="filter-btn category-pill px-4 py-2 rounded-full text-xs font-bold" data-filter="puzzle">Puzzle</button>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <a href="bird/index.html" class="game-card flex flex-col group" data-category="action popular">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="../ACCESCO-Living-/bird/image.png" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">FLAPPY JET</div>
+                </div>
+            </a>
+            <a href="game/flappybird/race.html" class="game-card flex flex-col group" data-category="action">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="game/flappybird/image.png" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">NEON RACER</div>
+                </div>
+            </a>
+            <a href="game/zombies/zombie.html" class="game-card flex flex-col group" data-category="puzzle popular">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="game/zombies/image.png" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">TECH QUIZ</div>
+                </div>
+            </a>
+            <a href="game/quiz/quiz.html" class="game-card flex flex-col group" data-category="puzzle popular">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">TECH QUIZ</div>
+                </div>
+            </a>
+            <a href="game/cards/card.html" class="game-card flex flex-col group" data-category="puzzle">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="game/cards/assets/image.png" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">CARD MATCH</div>
+                </div>
+            </a>
+            <a href="game/stick/stick.html" class="game-card flex flex-col group" data-category="action">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="game/stick/image.png" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">STICK GAME</div>
+                </div>
+            </a>
+            <a href="game/snake/snake.html" class="game-card flex flex-col group" data-category="action">
+                <div class="relative aspect-[16/9] mb-3 overflow-hidden rounded-2xl">
+                    <img src="game/snake/image.png" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 z-20 font-black text-xl heading-font">SNAKE MANIA</div>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <section id="rewards-section" class="max-w-4xl mx-auto px-4 mt-6 tab-content hidden-section">
+        <h2 class="text-2xl font-black heading-font mb-6 text-amber-500">REWARDS</h2>
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-white/10 flex justify-between items-center">
+            <div><h3 class="font-bold">Amazon Gift Card</h3><p class="text-xs text-slate-400">5,000 RP</p></div>
+            <button class="bg-amber-500 text-black px-4 py-2 rounded-lg font-black text-xs">CLAIM</button>
+        </div>
+    </section>
+
+    <section id="battles-section" class="max-w-4xl mx-auto px-4 mt-6 tab-content hidden-section text-center py-20">
+        <i data-lucide="swords" class="w-16 h-16 mx-auto text-amber-500 mb-4"></i>
+        <h2 class="text-2xl font-black heading-font">GLOBAL BATTLES</h2>
+        <p class="text-slate-400">Live Tournaments coming soon.</p>
+    </section>
+
+    <section id="wallet-section" class="max-w-4xl mx-auto px-4 mt-6 tab-content hidden-section">
+        <div class="bg-slate-900/80 p-10 rounded-3xl border border-white/10 text-center">
+            <h2 class="text-slate-400 text-sm font-bold uppercase">Reward Points</h2>
+            <div id="wallet-balance" class="text-6xl font-black heading-font text-amber-500 mt-2">0 <span class="text-xl">RP</span></div>
+            <p id="wallet-status" class="text-[10px] text-slate-500 mt-4 uppercase tracking-widest">Login to sync coins</p>
+        </div>
+    </section>
+
+    <nav class="fixed bottom-0 left-0 right-0 glass-nav z-50 px-8 py-3 flex justify-between items-center max-w-4xl mx-auto md:rounded-t-3xl">
+        <div class="nav-btn flex flex-col items-center space-y-1 text-amber-500 cursor-pointer" data-target="arena-section">
+            <i data-lucide="gamepad-2" class="w-6 h-6"></i><span class="text-[10px] font-bold">ARENA</span>
+        </div>
+        <div class="nav-btn flex flex-col items-center space-y-1 text-slate-500 cursor-pointer" data-target="rewards-section">
+            <i data-lucide="gift" class="w-6 h-6"></i><span class="text-[10px] font-bold">REWARDS</span>
+        </div>
+        <div class="nav-btn flex flex-col items-center space-y-1 text-slate-500 cursor-pointer" data-target="battles-section">
+            <i data-lucide="swords" class="w-6 h-6"></i><span class="text-[10px] font-bold">BATTLES</span>
+        </div>
+        <div class="nav-btn flex flex-col items-center space-y-1 text-slate-500 cursor-pointer" data-target="wallet-section">
+            <i data-lucide="wallet" class="w-6 h-6"></i><span class="text-[10px] font-bold">WALLET</span>
+        </div>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. SUPABASE CONFIG
+        const supabaseUrl = "https://nfdrnbikwzfmijrqmoqt.supabase.co";
+        const supabaseKey = "sb_publishable_dVvOYAqamp2BGoI8zvyB5g_NfCSkQ6b";
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. WALLET SYNC
+        async function syncCoins() {
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            const walletBalance = document.getElementById('wallet-balance');
+            const walletStatus = document.getElementById('wallet-status');
+
+            if (!user) return;
+
+            const { data, error } = await supabaseClient
+                .from('user_profiles')
+                .select('total_rp')
+                .eq('id', user.id)
+                .single();
+
+            if (data) {
+                walletBalance.innerHTML = `${data.total_rp.toLocaleString()} <span class="text-xl">RP</span>`;
+                walletStatus.innerText = "Coins Synced Successfully";
+            }
+        }
+
+        // 3. NAVIGATION & CATEGORY LOGIC
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
+                navBtns.forEach(b => b.classList.replace('text-amber-500', 'text-slate-500'));
+                btn.classList.replace('text-slate-500', 'text-amber-500');
+                tabContents.forEach(c => c.classList.add('hidden-section'));
+                document.getElementById(target).classList.remove('hidden-section');
+                if(target === 'wallet-section') syncCoins();
+                lucide.createIcons();
+            });
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                gameCards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    if (filter === 'all' || cat.includes(filter)) card.classList.remove('hidden');
+                    else card.classList.add('hidden');
+                });
+            });
+        });
+
+        syncCoins();
+    </script>
+</body>
+</html>
