@@ -10,6 +10,47 @@ const upload = multer({
 });
 
 const router = express.Router();
+
+async function collectAllCommentIdsForBlog(blogId) {
+  const allIds = new Set();
+
+  // Root comments
+  const { data: roots, error: rootsError } = await supabase
+    .from("comments")
+    .select("id")
+    .eq("blog_id", blogId);
+
+  if (rootsError) throw rootsError;
+
+  let frontier = (roots || []).map((r) => r.id).filter(Boolean);
+  frontier.forEach((id) => allIds.add(id));
+
+  // Replies (and nested replies) by walking parent_id chain
+  while (frontier.length) {
+    const nextFrontier = [];
+    for (let i = 0; i < frontier.length; i += 100) {
+      const batch = frontier.slice(i, i + 100);
+      const { data: replies, error: repliesError } = await supabase
+        .from("comments")
+        .select("id")
+        .in("parent_id", batch);
+
+      if (repliesError) throw repliesError;
+
+      (replies || []).forEach((r) => {
+        if (r?.id && !allIds.has(r.id)) {
+          allIds.add(r.id);
+          nextFrontier.push(r.id);
+        }
+      });
+    }
+
+    frontier = nextFrontier;
+  }
+
+  return Array.from(allIds);
+}
+
 /* =========================
    UPLOAD blog image
 ========================= */
@@ -89,6 +130,61 @@ router.post("/", async (req, res) => {
     res.status(201).json(data);
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+/* =========================
+   DELETE a blog (and dependents)
+========================= */
+router.delete("/:id", async (req, res) => {
+  try {
+    const blogId = req.params.id;
+
+    // 1) Delete comment likes -> comments (including replies)
+    const commentIds = await collectAllCommentIdsForBlog(blogId);
+
+    if (commentIds.length) {
+      for (let i = 0; i < commentIds.length; i += 100) {
+        const batch = commentIds.slice(i, i + 100);
+
+        const { error: commentLikesError } = await supabase
+          .from("comment_likes")
+          .delete()
+          .in("comment_id", batch);
+        if (commentLikesError) throw commentLikesError;
+
+        const { error: commentsError } = await supabase
+          .from("comments")
+          .delete()
+          .in("id", batch);
+        if (commentsError) throw commentsError;
+      }
+    }
+
+    // 2) Delete blog likes
+    const { error: blogLikesError } = await supabase
+      .from("blog_likes")
+      .delete()
+      .eq("blog_id", blogId);
+    if (blogLikesError) throw blogLikesError;
+
+    // 3) Delete the blog itself
+    const { data: deleted, error: blogDeleteError } = await supabase
+      .from("blogs")
+      .delete()
+      .eq("id", blogId)
+      .select();
+
+    if (blogDeleteError) throw blogDeleteError;
+
+    if (!deleted || deleted.length === 0) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
+
+    res.json({ ok: true, deleted: deleted[0] });
+  } catch (err) {
+    console.error("DELETE BLOG ERROR:", err);
+    res.status(500).json({ error: err.message || "Delete failed" });
   }
 });
 
