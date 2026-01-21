@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="../../swadisht.js"></script>
+    <script src="./swadisht.js"></script>
 
     <style>
         /* ===== HERO SECTION STYLES ===== */
@@ -355,6 +355,10 @@
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOMContentLoaded triggered');
+            console.log('supabaseClient available:', typeof supabaseClient !== 'undefined');
+            console.log('swadisht available:', typeof swadisht !== 'undefined');
+            
             isLoading = true;
             await loadRestaurants();
             await loadFoodItems();
@@ -365,10 +369,14 @@
         // ===== DATABASE LOADING FUNCTIONS =====
         async function loadRestaurants() {
             try {
+                console.log('loadRestaurants started...');
                 const restaurants = await fetchRestaurants();
+                console.log('Restaurants received:', restaurants);
+                
                 if (restaurants && restaurants.length > 0) {
                     allRestaurants = restaurants;
                     populateRestaurantFilter();
+                    console.log('Restaurants loaded:', restaurants.length);
                 } else {
                     console.warn('No restaurants found or empty response');
                     allRestaurants = [];
@@ -382,11 +390,15 @@
 
         async function loadFoodItems() {
             try {
+                console.log('loadFoodItems started...');
                 const foodItems = await fetchFoodItems();
+                console.log('Food items received:', foodItems);
+                
                 if (foodItems && foodItems.length > 0) {
                     allFoodItems = foodItems;
                     displayMenuItems(foodItems);
                     buildMenuItemsList(foodItems);
+                    console.log('Food items displayed successfully');
                 } else {
                     console.warn('No food items found or empty response');
                     allFoodItems = [];
@@ -428,7 +440,7 @@
                             <p class="text-gray-600 mb-4 text-sm">${item.description || 'Delicious Indian dish'}</p>
                             <div class="flex justify-between items-center">
                                 <span class="text-2xl font-bold text-orange-600">₹${item.price}</span>
-                                <button onclick="addToCartFromDB(${item.food_id}, '${item.name}', ${item.price}, '${imageUrl}', ${item.restraunt_id})" 
+                                <button onclick="addToCartFromDB(${item.food_id}, '${item.name}', ${item.price}, '${imageUrl}', ${item.restaurant_id})" 
                                     class="order-btn text-white px-4 py-2 rounded-lg ${!isAvailable ? 'opacity-50 cursor-not-allowed' : ''}"
                                     ${!isAvailable ? 'disabled' : ''}>
                                     ${isAvailable ? 'Add to Cart' : 'Unavailable'}
@@ -458,7 +470,7 @@
             // Add restaurant options
             allRestaurants.forEach(restaurant => {
                 const option = document.createElement('option');
-                option.value = restaurant.restraunt_id;
+                option.value = restaurant.restaurant_id;
                 option.textContent = restaurant.name;
                 filter.appendChild(option);
             });
@@ -471,7 +483,7 @@
                 name: name,
                 price: price,
                 image_url: imageUrl,
-                restraunt_id: restaurantId
+                restaurant_id: restaurantId
             });
             updateCart();
             showNotification(`${name} added to cart!`);
@@ -551,7 +563,7 @@
 
             try {
                 // Get the first restaurant from cart
-                const restaurantId = cart[0].restraunt_id;
+                const restaurantId = cart[0].restaurant_id;
 
                 // Prepare order items
                 const orderItems = cart.map(item => ({

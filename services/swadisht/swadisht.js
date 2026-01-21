@@ -12,16 +12,18 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
  */
 async function fetchRestaurants() {
   try {
+    console.log('fetchRestaurants: Starting request to restaurants table');
     const { data, error } = await supabaseClient
-      .from('restraunts')
+      .from('restaurants')
       .select('*')
       .eq('is_active', true);
 
     if (error) {
-      console.error('Error fetching restaurants:', error);
+      console.error('Supabase Error fetching restaurants:', error);
       return [];
     }
 
+    console.log('fetchRestaurants: Data received -', data);
     return data || [];
   } catch (error) {
     console.error('Error in fetchRestaurants:', error);
@@ -32,12 +34,12 @@ async function fetchRestaurants() {
 /**
  * Fetch a specific restaurant by ID
  */
-async function fetchRestaurantById(restrauntId) {
+async function fetchRestaurantById(restaurantId) {
   try {
     const { data, error } = await supabaseClient
-      .from('restraunts')
+      .from('restaurants')
       .select('*')
-      .eq('restraunt_id', restrauntId)
+      .eq('restaurant_id', restaurantId)
       .single();
 
     if (error) {
@@ -59,16 +61,18 @@ async function fetchRestaurantById(restrauntId) {
  */
 async function fetchFoodItems() {
   try {
+    console.log('fetchFoodItems: Starting request to food_items table');
     const { data, error } = await supabaseClient
       .from('food_items')
       .select('*')
       .eq('is_available', true);
 
     if (error) {
-      console.error('Error fetching food items:', error);
+      console.error('Supabase Error fetching food items:', error);
       return [];
     }
 
+    console.log('fetchFoodItems: Data received -', data);
     return data || [];
   } catch (error) {
     console.error('Error in fetchFoodItems:', error);
@@ -79,12 +83,12 @@ async function fetchFoodItems() {
 /**
  * Fetch food items by restaurant ID
  */
-async function fetchFoodItemsByRestaurant(restrauntId) {
+async function fetchFoodItemsByRestaurant(restaurantId) {
   try {
     const { data, error } = await supabaseClient
       .from('food_items')
       .select('*')
-      .eq('restraunt_id', restrauntId)
+      .eq('restaurant_id', restaurantId)
       .eq('is_available', true);
 
     if (error) {
@@ -127,14 +131,14 @@ async function fetchFoodItemById(foodId) {
 /**
  * Create a new order in the database
  */
-async function createOrder(userId, restrauntId, totalAmount, orderItems) {
+async function createOrder(userId, restaurantId, totalAmount, orderItems) {
   try {
     // Create the order
     const { data: orderData, error: orderError } = await supabaseClient
       .from('orders')
       .insert({
         user_id: userId,
-        restraunt_id: restrauntId,
+        restaurant_id: restaurantId,
         order_status: 'pending',
         total_amount: totalAmount,
         order_time: new Date().toISOString()
@@ -268,12 +272,12 @@ async function updateOrderStatus(orderId, newStatus) {
 /**
  * Fetch all orders for a specific restaurant
  */
-async function fetchRestaurantOrders(restrauntId) {
+async function fetchRestaurantOrders(restaurantId) {
   try {
     const { data, error } = await supabaseClient
       .from('orders')
       .select('*')
-      .eq('restraunt_id', restrauntId)
+      .eq('restaurant_id', restaurantId)
       .order('order_time', { ascending: false });
 
     if (error) {
@@ -439,10 +443,10 @@ class Swadisht {
   groupByRestaurant() {
     const grouped = {};
     this.cart.forEach(item => {
-      if (!grouped[item.restraunt_id]) {
-        grouped[item.restraunt_id] = [];
+      if (!grouped[item.restaurant_id]) {
+        grouped[item.restaurant_id] = [];
       }
-      grouped[item.restraunt_id].push(item);
+      grouped[item.restaurant_id].push(item);
     });
     return grouped;
   }
@@ -459,15 +463,16 @@ class Swadisht {
     const totalAmount = this.calculateTotal();
 
     // Assuming single restaurant order (can be extended for multiple restaurants)
-    const restrauntId = Object.keys(grouped)[0];
+    const restaurantId = Object.keys(grouped)[0];
 
     const orderItems = this.cart.map(item => ({
+      food_id: item.food_id,
       quantity: item.quantity,
       price: item.price,
-      food_image_url: item.image_url
+      food_image_url: item.food_image_url || item.image_url
     }));
 
-    const result = await createOrder(userId, restrauntId, totalAmount, orderItems);
+    const result = await createOrder(userId, restaurantId, totalAmount, orderItems);
 
     if (result.success) {
       this.clearCart();
