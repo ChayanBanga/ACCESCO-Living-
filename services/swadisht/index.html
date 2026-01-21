@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="swadisht.js"></script>
+    <script src="../../swadisht.js"></script>
 
     <style>
         /* ===== HERO SECTION STYLES ===== */
@@ -167,7 +167,7 @@
 
                 <div class="flex items-center relative">
                     <div class="logo-glow relative">
-                        <img src="images/swadisht_logo.JPG" alt="Swadisht Logo" class="h-14 w-auto mr-4 rounded-lg">
+                        <img src="../../images/swadisht_logo.JPG" alt="Swadisht Logo" class="h-14 w-auto mr-4 rounded-lg">
                         <div class="spice-decoration">🌶️</div>
                     </div>
                     <div class="hidden sm:block">
@@ -294,7 +294,7 @@
     <footer class="bg-gray-800 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex items-center justify-center mb-2">
-                <img src="images/swadisht_logo.JPG" alt="Swadisht Logo" class="h-8 w-auto mr-2">
+                <img src="../../images/swadisht_logo.JPG" alt="Swadisht Logo" class="h-8 w-auto mr-2">
                 <span class="text-xl font-bold">Swadisht</span>
             </div>
             <div class="text-sm text-orange-400 font-medium mb-4">powered by Accesco Living</div>
@@ -307,7 +307,7 @@
 
             <div class="flex justify-between items-center mb-6">
                 <div class="flex items-center">
-                    <img src="images/swadisht_logo.JPG" alt="Swadisht Logo" class="h-10 w-auto mr-3 rounded">
+                    <img src="../../images/swadisht_logo.JPG" alt="Swadisht Logo" class="h-10 w-auto mr-3 rounded">
                     <span class="text-xl font-bold text-orange-600">Swadisht</span>
                 </div>
                 <button onclick="toggleMenu()" class="text-gray-500 hover:text-gray-700 transition-colors">
@@ -351,35 +351,52 @@
         let allRestaurants = [];
         let menuItems = [];
         let currentFilteredItems = [];
+        let isLoading = true;
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', async function() {
+            isLoading = true;
             await loadRestaurants();
             await loadFoodItems();
             setupEventListeners();
+            isLoading = false;
         });
 
         // ===== DATABASE LOADING FUNCTIONS =====
         async function loadRestaurants() {
             try {
                 const restaurants = await fetchRestaurants();
-                allRestaurants = restaurants;
-                populateRestaurantFilter();
+                if (restaurants && restaurants.length > 0) {
+                    allRestaurants = restaurants;
+                    populateRestaurantFilter();
+                } else {
+                    console.warn('No restaurants found or empty response');
+                    allRestaurants = [];
+                }
             } catch (error) {
                 console.error('Error loading restaurants:', error);
-                showNotification('Error loading restaurants');
+                allRestaurants = [];
+                showNotification('Unable to load restaurants. Please try refreshing the page.', 'warning');
             }
         }
 
         async function loadFoodItems() {
             try {
                 const foodItems = await fetchFoodItems();
-                allFoodItems = foodItems;
-                displayMenuItems(foodItems);
-                buildMenuItemsList(foodItems);
+                if (foodItems && foodItems.length > 0) {
+                    allFoodItems = foodItems;
+                    displayMenuItems(foodItems);
+                    buildMenuItemsList(foodItems);
+                } else {
+                    console.warn('No food items found or empty response');
+                    allFoodItems = [];
+                    displayMenuItems([]);
+                }
             } catch (error) {
                 console.error('Error loading food items:', error);
-                showNotification('Error loading food items');
+                allFoodItems = [];
+                displayMenuItems([]);
+                showNotification('Unable to load food items. Please check your connection and try again.', 'warning');
             }
         }
 
@@ -387,11 +404,12 @@
         function displayMenuItems(items) {
             const container = document.getElementById('menu-container');
             
-            if (items.length === 0) {
+            if (!items || items.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full text-center py-8">
-                        <i class="fas fa-inbox text-4xl text-gray-400"></i>
-                        <p class="text-gray-600 mt-4">No dishes available at the moment</p>
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-utensils text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 text-lg">No dishes available at the moment</p>
+                        <p class="text-gray-500 text-sm mt-2">We're updating our menu. Please check back soon!</p>
                     </div>
                 `;
                 return;
