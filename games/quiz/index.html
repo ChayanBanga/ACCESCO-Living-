@@ -413,11 +413,7 @@
     </div>
   </div>
 
-  <script type="module">
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-    const supabaseUrl = "https://nfdrnbikwzfmijrqmoqt.supabase.co";
-    const supabaseKey = "sb_publishable_dVvOYAqamp2BGoI8zvyB5g_NfCSkQ6b";
-    const supabase = createClient(supabaseUrl, supabaseKey);
+  <script type="module" src="../../js/quiz-game.js"></script>
 
     let selectedFile = null, currentFilter = 'All', cachedBlogs = [], activePostId = null, imgSourceMode = 'local';
 
@@ -538,5 +534,3 @@
     window.closeWriteModal = () => { document.getElementById('writeOverlay').style.display = 'none'; document.getElementById('writePreview').style.display = 'none'; selectedFile = null; document.body.style.overflow = 'auto'; };
     window.closeReader = () => { document.getElementById('readerOverlay').style.display = 'none'; document.body.style.overflow = 'auto'; };
   </script>
-</body>
-</html>

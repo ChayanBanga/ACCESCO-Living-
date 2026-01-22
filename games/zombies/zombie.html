@@ -225,23 +225,7 @@
     </div>
 </div>
 
-<script>
-    // Initialize elements
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const mathCard = document.getElementById('math-card');
-    const questionText = document.getElementById('question-text');
-    const answersGrid = document.getElementById('answers-grid');
-    const scoreVal = document.getElementById('score-val');
-    const startBtn = document.getElementById('start-btn');
-    const overlay = document.getElementById('overlay');
-    const overlayTitle = document.getElementById('overlay-title');
-    const overlayDesc = document.getElementById('overlay-desc');
-    const distanceAlert = document.getElementById('distance-alert');
-    const progressBar = document.getElementById('progress-bar');
-    const quipBubble = document.getElementById('quip-bubble');
-    const vignette = document.getElementById('vignette');
-    const doorNum = document.getElementById('door-num');
+<script src="../../js/zombie-math.js"></script>
 
     // Quips & Assets
     const RIGHT_QUIPS = ["Calculated!", "Brain Blast!", "Too easy!", "Next!", "Genius!", "Speed Math!", "Locked & Loaded!"];
@@ -669,7 +653,5 @@
         };
         gameLoop();
     };
-</script>
 
-</body>
 </html>

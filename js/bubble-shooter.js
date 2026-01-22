@@ -1460,4 +1460,3 @@ window.addEventListener('load', () => {
     UI.updateMusicButton();
     UI.showScreen('mainMenu');
 });
-                

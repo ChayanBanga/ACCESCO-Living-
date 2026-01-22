@@ -352,48 +352,7 @@
   <div class="toggle" id="toggleMode">Don't have an account? <span>Sign Up</span></div>
 </div>
 
-<script type="module">
-  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-  // Initialize Supabase client
-  const supabase = createClient(
-    "https://nfdrnbikwzfmijrqmoqt.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5mZHJuYmlrd3pmbWlqcnFtb3F0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwNzAyNjYsImV4cCI6MjA4MTY0NjI2Nn0.u4ThkmfWiCOJrfcxm0RB-oaVysQ5Y8kha7k66UdUuH0"
-  );
-
-  const googleBtn = document.getElementById("googleBtn");
-
-  // 1️⃣ Start Google OAuth flow (PRODUCTION DOMAIN)
-  googleBtn.addEventListener("click", async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "https://accesco.co.in/login.html"
-      }
-    });
-  });
-
-  // 2️⃣ Consume OAuth hash & establish session
-  const { data, error } = await supabase.auth.getSession();
-
-  if (error) {
-    console.error("Auth error:", error.message);
-  }
-
-  // 3️⃣ If session exists, redirect to production home
-  if (data?.session) {
-    window.location.replace("https://accesco.co.in/index.html");
-  }
-  document.getElementById("backBtn").addEventListener("click", () => {
-    // This will take the user back to the previous page in history
-    if (document.referrer.includes(window.location.hostname)) {
-        window.history.back();
-    } else {
-        // Fallback to home if there is no history
-        window.location.href = "index.html";
-    }
-  });
-</script>
+<script type="module" src="../../js/login-auth.js"></script>
 
 
 

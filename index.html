@@ -2968,399 +2968,63 @@
         </div>
     </div>
 
-    <script>
-        const stack = document.getElementById('stack');
-        const cards = Array.from(stack.querySelectorAll('.stack-card'));
-        let isAnimating = false;
-        let startX = 0;
-        let startY = 0;
+    <script src="js/stack-cards.js"></script>
 
-        stack.addEventListener('mousedown', startSwipe);
-        stack.addEventListener('touchstart', startSwipe);
+    <script src="js/submit-btn-effects.js"></script>
 
-        function startSwipe(e) {
-            if (isAnimating) return;
-            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-            document.addEventListener('mouseup', endSwipe);
-            document.addEventListener('touchend', endSwipe);
-        }
+    <script src="js/auth-supabase.js"></script>
 
-        function endSwipe(e) {
-            if (isAnimating) return;
-            const endX = e.type.includes('mouse') ? e.clientX : e.changedTouches[0].clientX;
-            const diff = endX - startX;
-
-            if (Math.abs(diff) > 50) {
-                const direction = diff > 0 ? 'right' : 'left';
-                animateStack(direction);
-            } else if (diff === 0 && e.target.closest('.stack-card')) {
-                animateStack('left');
-            }
-
-            document.removeEventListener('mouseup', endSwipe);
-            document.removeEventListener('touchend', endSwipe);
-        }
-
-        function animateStack(direction) {
-            isAnimating = true;
-            const front = cards.find(c => c.classList.contains('pos-1'));
-            const mid = cards.find(c => c.classList.contains('pos-2'));
-            const back = cards.find(c => c.classList.contains('pos-3'));
-
-            front.classList.add(direction === 'right' ? 'swipe-right' : 'swipe-left');
-
-            setTimeout(() => {
-                front.classList.remove('pos-1', 'swipe-right', 'swipe-left');
-                front.classList.add('pos-3');
-
-                mid.classList.remove('pos-2');
-                mid.classList.add('pos-1');
-
-                back.classList.remove('pos-3');
-                back.classList.add('pos-2');
-
-                isAnimating = false;
-            }, 300);
-        }
-    </script>
-
-    <script>
-        (() => {
-            const btn = document.querySelector('.submit-btn');
-            if (!btn) return;
-
-            btn.addEventListener('pointermove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const offsetX = e.clientX - rect.left;
-                const offsetY = e.clientY - rect.top;
-                const tiltX = ((offsetX / rect.width) - 0.5) * 10;
-                const tiltY = -((offsetY / rect.height) - 0.5) * 6;
-                btn.style.setProperty('--tiltX', `${tiltX}deg`);
-                btn.style.setProperty('--tiltY', `${tiltY}deg`);
-            });
-
-            btn.addEventListener('pointerleave', () => {
-                btn.style.setProperty('--tiltX', '0deg');
-                btn.style.setProperty('--tiltY', '0deg');
-            });
-
-            btn.addEventListener('click', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const ripple = document.createElement('span');
-                ripple.className = 'submit-ripple';
-                ripple.style.left = `${e.clientX - rect.left}px`;
-                ripple.style.top = `${e.clientY - rect.top}px`;
-                btn.appendChild(ripple);
-                ripple.addEventListener('animationend', () => ripple.remove());
-            });
-        })();
-    </script>
-
-    <script>
-        // State variable
-        let isUserLoggedIn = false; 
-
-        // Main Handler for Top Right Icon
-        function handleUserClick() {
-            if (isUserLoggedIn) {
-                openProfileModal();
-            } else {
-                openLoginModal();
-            }
-        }
-
-        // Login Modal Functions
-        function openLoginModal() {
-            document.getElementById('loginOverlay').classList.add('show');
-        }
-        function closeLoginModal() {
-            document.getElementById('loginOverlay').classList.remove('show');
-        }
-
-        // Profile Modal Functions
-        function openProfileModal() {
-            document.getElementById('profileOverlay').classList.add('show');
-        }
-        function closeProfileModal() {
-            document.getElementById('profileOverlay').classList.remove('show');
-        }
-
-        // Logic to simulate login/logout
-        function performLogin() {
-            isUserLoggedIn = true;
-            closeLoginModal();
-            
-            // Optional: Visual feedback on the top icon
-            const userBtn = document.querySelector('.nav-user-btn');
-            userBtn.style.color = "var(--accent)"; 
-            userBtn.innerHTML = '<i class="ri-user-smile-fill"></i>';
-        }
-
-        function logoutUser() {
-            isUserLoggedIn = false;
-            closeProfileModal();
-            
-            // Reset Icon
-            const userBtn = document.querySelector('.nav-user-btn');
-            userBtn.style.color = "#000";
-            userBtn.innerHTML = '<i class="ri-user-line"></i>';
-        }
-
-        // Close if clicked outside
-        document.getElementById('loginOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeLoginModal();
-        });
-        document.getElementById('profileOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeProfileModal();
-        });
-        
-        // Expose to window so console users can test it easily
-        window.openLoginModal = openLoginModal;
-    </script>
-    
-
-    <script type="module">
-/* ======================================================
-   SUPABASE SETUP
-====================================================== */
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-const supabaseUrl = "https://nfdrnbikwzfmijrqmoqt.supabase.co";
-const supabaseKey = "sb_publishable_dVvOYAqamp2BGoI8zvyB5g_NfCSkQ6b";
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-/* ======================================================
-   DYNAMIC BLOG FETCH (DISABLED FOR HARDCODED CONTENT)
-====================================================== */
-/* async function fetchHomeBlogs() {
-    const blogContainer = document.getElementById('dynamicBlogGrid');
-    try {
-        const { data: blogs, error } = await supabase
-            .from('blogs')
-            .select('*')
-            .order('created_at', { ascending: false })
-            .limit(3);
-
-        if (error) throw error;
-
-        if (blogs && blogs.length > 0) {
-            blogContainer.innerHTML = blogs.map(post => {
-                const dateStr = new Date(post.created_at).toLocaleDateString('en-IN', { 
-                    day: 'numeric', 
-                    month: 'short', 
-                    year: 'numeric' 
-                });
-                return `
-                <article class="blog-card">
-                    <div class="blog-img">
-                        <span class="blog-tag">${post.category || 'Lifestyle'}</span>
-                        <img src="${post.image_url || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800'}" alt="${post.title}">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date"><i class="ri-calendar-line"></i> ${dateStr}</div>
-                        <h4>${post.title}</h4>
-                        <p>${post.content.substring(0, 100)}...</p>
-                        <a href="BLOGS_PAGE/blogs.html" class="blog-link">Read Article <i class="ri-arrow-right-line"></i></a>
-                    </div>
-                </article>`;
-            }).join('');
-        } else {
-            blogContainer.innerHTML = '<p style="color: var(--muted);">No current highlights found.</p>';
-        }
-    } catch (err) {
-        console.error("Home blog fetch failed:", err);
-        blogContainer.innerHTML = '<p style="color: var(--muted);">Unable to load latest insights.</p>';
-    }
-}
-window.addEventListener('DOMContentLoaded', fetchHomeBlogs);
-*/
-
-/* ======================================================
-   DOM ELEMENTS (AUTH)
-====================================================== */
-const loginOverlay = document.getElementById("loginOverlay");
-const navLoginBtn = document.getElementById("navLoginBtn");
-const navProfileWrapper = document.getElementById("navProfileWrapper");
-const navProfileImg = document.getElementById("navProfileImg");
-const profilePopup = document.getElementById("profilePopup");
-
-/* ======================================================
-   UI HELPERS (AUTH)
-====================================================== */
-function showLoggedInUI(user) {
-  if (navLoginBtn) navLoginBtn.style.display = "none";
-
-  if (navProfileWrapper && navProfileImg) {
-    navProfileImg.src =
-      user.user_metadata?.avatar_url || "images/accesco.png";
-    navProfileWrapper.style.display = "block";
-  }
-
-  if (loginOverlay) loginOverlay.style.display = "none";
-}
-
-function showLoggedOutUI() {
-  if (navProfileWrapper) navProfileWrapper.style.display = "none";
-  if (navLoginBtn) navLoginBtn.style.display = "inline-flex";
-  if (profilePopup) profilePopup.style.display = "none";
-}
-
-/* ======================================================
-   SESSION CHECK (ON PAGE LOAD)
-====================================================== */
-try {
-  const { data } = await supabase.auth.getSession();
-
-  if (data?.session?.user) {
-    showLoggedInUI(data.session.user);
-  } else {
-    showLoggedOutUI();
-  }
-} catch (err) {
-  console.warn("Auth check failed:", err);
-  showLoggedOutUI();
-}
-
-/* ======================================================
-   AUTH STATE CHANGE LISTENER
-====================================================== */
-supabase.auth.onAuthStateChange((event, session) => {
-  if (event === "SIGNED_IN" && session?.user) {
-    showLoggedInUI(session.user);
-  }
-
-  if (event === "SIGNED_OUT") {
-    showLoggedOutUI();
-  }
-});
-
-/* ======================================================
-   EXPOSE FUNCTIONS TO HTML (MODULE SAFE)
-====================================================== */
-window.openLoginModal = function () {
-  if (loginOverlay) loginOverlay.style.display = "flex";
-};
-
-window.closeLoginModal = function () {
-  if (loginOverlay) loginOverlay.style.display = "none";
-};
-
-window.toggleProfilePopup = function () {
-  if (!profilePopup) return;
-
-  profilePopup.style.display =
-    profilePopup.style.display === "block" ? "none" : "block";
-};
-
-window.logoutUser = async function () {
-  await supabase.auth.signOut();
-  showLoggedOutUI();
-};
-
-/* ======================================================
-   CLOSE PROFILE POPUP ON OUTSIDE CLICK
-====================================================== */
-document.addEventListener("click", (e) => {
-  if (
-    navProfileWrapper &&
-    profilePopup &&
-    !navProfileWrapper.contains(e.target)
-  ) {
-    profilePopup.style.display = "none";
-  }
-});
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const smToggle = document.getElementById('smToggle');
-    const smPanel = document.getElementById('smPanel');
-    const smIcon = document.getElementById('smIcon');
-    const smText = document.getElementById('smToggleText');
-    
-    let isMenuOpen = false;
-
-    smToggle.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-
-        // Toggle visibility instantly
-        smPanel.classList.toggle('active');
-        smIcon.classList.toggle('menu-open');
-
-        if (isMenuOpen) {
-            smToggle.style.color = "#000";
-            smToggle.style.background = "#fff";
-            smText.innerText = "Close";
-        } else {
-            smToggle.style.color = "#fff";
-            smToggle.style.background = "rgba(255, 255, 255, 0.2)";
-            smText.innerText = "Menu";
-        }
-    });
-
-    // Close menu on link click
-    document.querySelectorAll('.sm-panel-item').forEach(link => {
-        link.addEventListener('click', () => {
-            if (isMenuOpen) smToggle.click();
-        });
-    });
-});
-</script>
-
-<script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ACCESCO",
-    "url": "https://www.accescoliving.com/",
-    "logo": "https://accesco.co.in/images/accesco_white.png",
-    "sameAs": [
-      "https://www.facebook.com/Accesco-Living-110022318042293",
-      "https://www.instagram.com/accescoliving",
-      "https://www.linkedin.com/company/acceso-living/",
-      "https://x.com/accesco_living",
-      "https://www.youtube.com/@accescoliving",
-      "https://www.threads.net/@accescoliving"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+919900384517",
-      "contactType": "customer service"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "ACCESCO - Access Everything",
-    "url": "https://www.accescoliving.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.accescoliving.com/?s={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Accesco Living",
-    "image": "https://accesco.co.in/images/accesco_white.png",
-    "telePhone": "+919900384517",
-    "priceRange": "INR",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Update with your building/street",
-      "addressLocality": "Update City",
-      "addressRegion": "Update State",
-      "postalCode": "Update PIN",
-      "addressCountry": "IN"
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ACCESCO",
+      "url": "https://www.accescoliving.com/",
+      "logo": "https://accesco.co.in/images/accesco_white.png",
+      "sameAs": [
+        "https://www.facebook.com/Accesco-Living-110022318042293",
+        "https://www.instagram.com/accescoliving",
+        "https://www.linkedin.com/company/acceso-living/",
+        "https://x.com/accesco_living",
+        "https://www.youtube.com/@accescoliving",
+        "https://www.threads.net/@accescoliving"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+919900384517",
+        "contactType": "customer service"
+      }
     },
-    "openingHours": "Mo-Su 00:00-23:59"
-  }
-]
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ACCESCO - Access Everything",
+      "url": "https://www.accescoliving.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.accescoliving.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Accesco Living",
+      "image": "https://accesco.co.in/images/accesco_white.png",
+      "telePhone": "+919900384517",
+      "priceRange": "INR",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Update with your building/street",
+        "addressLocality": "Update City",
+        "addressRegion": "Update State",
+        "postalCode": "Update PIN",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 00:00-23:59"
+    }
+    ]
+    </script>
       
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1" defer></script>
@@ -3394,48 +3058,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chat-icon="https://github.com/accescoliving-tech/ACCESCO-Living-/blob/main/images/IMG_5111.PNG?raw=true">
 </df-messenger>
 
-<script>
-  const dfMessenger = document.querySelector('df-messenger');
-
-  // 1. Listen for the 'df-messenger-opened' event
-  dfMessenger.addEventListener('df-messenger-opened', () => {
-    // 2. Small timeout ensures internal Shadow DOM components are rendered
-    setTimeout(() => {
-      const chat = dfMessenger.shadowRoot?.querySelector('df-messenger-chat');
-      const titlebar = chat?.shadowRoot?.querySelector('df-messenger-titlebar');
-      const header = titlebar?.shadowRoot?.querySelector('header');
-
-      if (header && !header.querySelector('.custom-back-btn')) {
-        // 3. Create the button
-        const backBtn = document.createElement('button');
-        backBtn.className = 'custom-back-btn';
-        backBtn.innerHTML = '←';
-        
-        // 4. Match your bright UI theme
-        backBtn.style.cssText = `
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #000000;
-          padding: 0 12px 0 4px;
-          display: flex;
-          align-items: center;
-          font-weight: bold;
-        `;
-
-        // 5. Close the chat on click
-        backBtn.onclick = (e) => {
-          e.stopPropagation(); // Prevent titlebar events
-          dfMessenger.opened = false;
-        };
-
-        // 6. Insert at the very start of the header
-        header.prepend(backBtn);
-      }
-    }, 100);
-  });
-</script>
+<script src="js/dialogflow-messenger.js"></script>
 
 </body>
 </html>

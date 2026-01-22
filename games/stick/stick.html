@@ -191,21 +191,7 @@
     <div id="fight-start">FIGHT!</div>
 </div>
 
-<script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // UI
-    const splash = document.getElementById('splash-screen');
-    const startBtn = document.getElementById('start-btn');
-    const fightStartText = document.getElementById('fight-start');
-    const playerHPFill = document.getElementById('player-hp');
-    const playerENFill = document.getElementById('player-en');
-    const enemyHPFill = document.getElementById('enemy-hp');
-    const enemyENFill = document.getElementById('enemy-en');
-    const comboUI = document.getElementById('combo-container');
-    const comboCountText = comboUI.querySelector('.combo-count');
-    const comboRankText = comboUI.querySelector('.rank-text');
+<script src="../../js/stick-fighter.js"></script>
 
     const WIDTH = 1000;
     const HEIGHT = 500;
@@ -754,7 +740,6 @@
     }
 
     loop();
-</script>
 
 </body>
 </html>
