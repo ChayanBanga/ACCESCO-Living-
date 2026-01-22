@@ -1,0 +1,11 @@
+# robots.txt
+# Location: https://accesco.co.in/robots.txt
+
+############################################
+# Global rules (apply to all crawlers)
+############################################
+User-agent: *
+
+Disallow:
+
+Allow: /
