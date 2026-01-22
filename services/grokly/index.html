@@ -1,209 +1,238 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Grokly Market | Fresh, Fast & Fashion</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grokly Market | Fresh, Fast & Fashion</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Google Maps API - Replace GMAP_API_KEY with actual Google Maps API key -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=GMAP_API_KEY&libraries=places&callback=initGoogleMaps"></script>
+    <script src="../../js/grokly-maps.js"></script>
 
-<style>
-  :root { 
-    --primary: #27ae60; 
-    --primary-light: #eafaf1;
-    --dark: #1a1a1a; 
-    --gray: #f4f4f4;
-    --text-muted: #717171;
-    --shadow: 0 4px 12px rgba(0,0,0,0.08);
-  }
+    <style>
+        :root {
+            --primary: #27ae60;
+            --primary-light: #eafaf1;
+            --dark: #1a1a1a;
+            --gray: #f4f4f4;
+            --text-muted: #717171;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
 
-  body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: #fff; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: #fff; }
 
-  /* --- Improved Grid Layout --- */
-  .market-feed { padding: 20px; max-width: 1200px; margin: 0 auto; }
-  .feed-section { margin-bottom: 40px; }
-  
-  .feed-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: var(--dark);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+        /* --- Improved Grid Layout --- */
+        .market-feed { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .feed-section { margin-bottom: 40px; }
 
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-  }
+        .feed-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  /* --- Modern Product Cards --- */
-  .product-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-  }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
 
-  .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        /* --- Modern Product Cards --- */
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
 
-  .p-img-wrapper {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: var(--gray);
-    overflow: hidden;
-    position: relative;
-  }
+        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
 
-  .p-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.5s ease; }
-  .product-card:hover .p-img { scale: 1.1; }
+        .p-img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: var(--gray);
+            overflow: hidden;
+            position: relative;
+        }
 
-  /* Adjustments for Clothes */
-  .product-card[data-category="Clothes"] .p-img { object-fit: contain; padding: 10px; background: #fff; }
+        .p-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.5s ease; }
+        .product-card:hover .p-img { scale: 1.1; }
 
-  .p-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-  .p-title {
-    font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: var(--dark);
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    overflow: hidden; height: 2.4em;
-  }
+        /* Adjustments for Clothes */
+        .product-card[data-category="Clothes"] .p-img { object-fit: contain; padding: 10px; background: #fff; }
 
-  .p-meta {
-    font-weight: 800; color: var(--primary); font-size: 1.1rem;
-    margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-  }
+        .p-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        .p-title {
+            font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: var(--dark);
+            display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden; height: 2.4em;
+        }
 
-  .add-btn {
-    background: var(--primary-light); color: var(--primary); border: none;
-    padding: 6px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s;
-  }
+        .p-meta {
+            font-weight: 800; color: var(--primary); font-size: 1.1rem;
+            margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+        }
 
-  .add-btn:hover:not(:disabled) { background: var(--primary); color: white; }
-  .add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .add-btn {
+            background: var(--primary-light); color: var(--primary); border: none;
+            padding: 6px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s;
+        }
 
-  /* Header & UI Components */
-  .main-header { position: sticky; top: 0; background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%); z-index: 1000; border-bottom: 2px solid #eee; padding: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .header-container { max-width: 1200px; margin: 0 auto; px: 20px; }
-  .header-top { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand-name { font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin: 0; background: linear-gradient(135deg, #27ae60 0%, #1e8e4f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .logo { height: 36px; }
-  
-  .header-bottom { display: flex; gap: 15px; padding: 8px 20px; align-items: center; }
-  .search-bar { flex-grow: 1; background: white; border: 2px solid #e8e8e8; border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-  .search-bar:focus-within { border-color: #27ae60; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.15); }
-  .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 0.9rem; color: var(--dark); }
-  .search-bar input::placeholder { color: #aaa; font-weight: 500; }
-  .search-bar i { color: #27ae60; font-size: 1.1rem; }
-  
-  .action-icons { display: flex; gap: 15px; align-items: center; }
-  .action-icons i { cursor: pointer; color: var(--dark); font-size: 1.3rem; transition: 0.2s; }
-  .action-icons i:hover { color: var(--primary); transform: scale(1.1); }
-  
-  .category-bar { display: flex; overflow-x: auto; gap: 10px; padding: 15px 20px; border-bottom: 1px solid #eee; white-space: nowrap; scrollbar-width: none; }
-  .category { padding: 8px 18px; background: var(--gray); border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-  .category.active { background: var(--primary); color: white; }
+        .add-btn:hover:not(:disabled) { background: var(--primary); color: white; }
+        .add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* Cart & Modals */
-  .side-cart { position: fixed; right: -400px; top: 0; width: 100%; max-width: 400px; height: 100%; background: white; z-index: 2000; transition: 0.4s; box-shadow: -5px 0 25px rgba(0,0,0,0.1); }
-  .side-cart.show { right: 0; }
-  .cart-backdrop, .address-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 1500; }
-  .cart-backdrop.show, .address-backdrop.show { display: block; }
-  
-  .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px; font-weight: 800; font-size: 1.2rem; }
-  .cart-body { padding: 20px; overflow-y: auto; height: calc(100% - 180px); }
-  .cart-footer { padding: 20px; border-top: 1px solid #eee; }
-  .total-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.2rem; }
-  .checkout-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        /* Header & UI Components */
+        .main-header { position: sticky; top: 0; background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%); z-index: 1000; border-bottom: 2px solid #eee; padding: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand-name { font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin: 0; background: linear-gradient(135deg, #27ae60 0%, #1e8e4f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo { height: 36px; }
 
-  /* Address Modal */
-  .address-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; width: 90%; max-width: 400px; border-radius: 24px; padding: 25px; z-index: 2100; display: none; }
-  .address-modal.show { display: block; }
-  .address-body input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .header-bottom { display: flex; gap: 15px; padding: 8px 20px; align-items: center; }
+        .search-bar { flex-grow: 1; background: white; border: 2px solid #e8e8e8; border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .search-bar:focus-within { border-color: #27ae60; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.15); }
+        .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 0.9rem; color: var(--dark); }
+        .search-bar input::placeholder { color: #aaa; font-weight: 500; }
+        .search-bar i { color: #27ae60; font-size: 1.1rem; }
 
-  .success-toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-    background: var(--primary); color: white; padding: 16px 32px;
-    border-radius: 50px; z-index: 3000; display: none;
-    box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
-    font-weight: 600; animation: slideUp 0.3s ease-out;
-  }
-  @keyframes slideUp { from { bottom: -50px; opacity: 0; } to { bottom: 30px; opacity: 1; } }
-</style>
+        .action-icons { display: flex; gap: 15px; align-items: center; }
+        .action-icons i { cursor: pointer; color: var(--dark); font-size: 1.3rem; transition: 0.2s; }
+        .action-icons i:hover { color: var(--primary); transform: scale(1.1); }
+
+        .category-bar { display: flex; overflow-x: auto; gap: 10px; padding: 15px 20px; border-bottom: 1px solid #eee; white-space: nowrap; scrollbar-width: none; }
+        .category { padding: 8px 18px; background: var(--gray); border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+        .category.active { background: var(--primary); color: white; }
+
+        /* Cart & Modals */
+        .side-cart { position: fixed; right: -400px; top: 0; width: 100%; max-width: 400px; height: 100%; background: white; z-index: 2000; transition: 0.4s; box-shadow: -5px 0 25px rgba(0,0,0,0.1); }
+        .side-cart.show { right: 0; }
+        .cart-backdrop, .address-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 1500; }
+        .cart-backdrop.show, .address-backdrop.show { display: block; }
+
+        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px; font-weight: 800; font-size: 1.2rem; }
+        .cart-body { padding: 20px; overflow-y: auto; height: calc(100% - 180px); }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+        .total-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.2rem; }
+        .checkout-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+
+        /* Address Modal */
+        .address-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; width: 90%; max-width: 500px; border-radius: 24px; padding: 25px; z-index: 2100; display: none; max-height: 90vh; overflow-y: auto; }
+        .address-modal.show { display: block; }
+        .address-body input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+
+        .get-location-btn {
+            width: 100%; background: linear-gradient(135deg, #27ae60 0%, #1e8e4f 100%); color: white;
+            border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer;
+            margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .get-location-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); }
+        .get-location-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .map-container {
+            width: 100%; height: 300px; border-radius: 12px; overflow: hidden;
+            margin-bottom: 15px; border: 2px solid #eee; display: none;
+        }
+        .map-container.show { display: block; }
+
+        .coordinates-display {
+            padding: 10px; background: var(--gray); border-radius: 8px;
+            margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted); display: none;
+        }
+        .coordinates-display.show { display: block; }
+
+        .success-toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: white; padding: 16px 32px;
+            border-radius: 50px; z-index: 3000; display: none;
+            box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
+            font-weight: 600; animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp { from { bottom: -50px; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+    </style>
 </head>
 
 <body>
 <header class="main-header">
-  <div class="header-container">
-    <div class="header-top">
-      <div class="brand">
-        <img src="./images/grokerly_logo.png" alt="Grokly Logo" class="logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3724/3724720.png'">
-        <h1 class="brand-name">Grokly</h1>
-      </div>
-      <button class="add-btn" id="addressBtn" style="background: linear-gradient(135deg, #27ae60 0%, #1e8e4f 100%); color: white; border: none; padding: 10px 18px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-        <i class="ri-map-pin-line"></i> <span id="addrDisplay">Add address</span>
-      </button>
-    </div>
-    <div class="header-bottom">
-      <div class="search-bar">
-        <i class="ri-search-line"></i>
-        <input type="search" id="searchInput" placeholder="Search for food, clothes & more...">
-      </div>
-      <div class="action-icons" style="display:flex; gap:15px;">
-        <div id="cartBtn" style="position:relative; cursor:pointer;">
-          <i class="ri-shopping-cart-line" style="font-size:1.5rem;"></i>
-          <span id="cart-count" style="position:absolute; top:-5px; right:-5px; background:red; color:white; font-size:10px; padding:2px 5px; border-radius:10px; display:none;">0</span>
+    <div class="header-container">
+        <div class="header-top">
+            <div class="brand">
+                <img src="./images/grokerly_logo.png" alt="Grokly Logo" class="logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3724/3724720.png'">
+                <h1 class="brand-name">Grokly</h1>
+            </div>
+            <button class="add-btn" id="addressBtn" style="background: linear-gradient(135deg, #27ae60 0%, #1e8e4f 100%); color: white; border: none; padding: 10px 18px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="ri-map-pin-line"></i> <span id="addrDisplay">Add address</span>
+            </button>
         </div>
-      </div>
+        <div class="header-bottom">
+            <div class="search-bar">
+                <i class="ri-search-line"></i>
+                <input type="search" id="searchInput" placeholder="Search for food, clothes & more...">
+            </div>
+            <div class="action-icons" style="display:flex; gap:15px;">
+                <div id="cartBtn" style="position:relative; cursor:pointer;">
+                    <i class="ri-shopping-cart-line" style="font-size:1.5rem;"></i>
+                    <span id="cart-count" style="position:absolute; top:-5px; right:-5px; background:red; color:white; font-size:10px; padding:2px 5px; border-radius:10px; display:none;">0</span>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </header>
- 
+
 <div class="category-bar" id="categoryBar">
-  <div class="category active">All</div>
-  <div class="category">Vegetables</div>
-  <div class="category">Fruits</div>
-  <div class="category">Dairy and Bakery</div>
-  <div class="category">Clothes</div>
-  <div class="category">Snacks</div>
-  <div class="category">Grocery</div>
+    <div class="category active">All</div>
+    <div class="category">Vegetables</div>
+    <div class="category">Fruits</div>
+    <div class="category">Dairy and Bakery</div>
+    <div class="category">Clothes</div>
+    <div class="category">Snacks</div>
+    <div class="category">Grocery</div>
 </div>
 
 <section id="feed" class="market-feed"></section>
 
 <div class="cart-backdrop" id="cartBackdrop"></div>
 <aside class="side-cart" id="cartView">
-  <div class="cart-header">
-    <i class="ri-arrow-left-line" id="closeCart" style="cursor:pointer;"></i>
-    <span>Your Cart</span>
-  </div>
-  <div class="cart-body" id="cartItems"></div>
-  <div class="cart-footer">
-    <div class="total-row"><span>Total</span><strong id="cartTotal">₹0</strong></div>
-    <button class="checkout-btn" id="placeOrderBtn">Place Order</button>
-  </div>
+    <div class="cart-header">
+        <i class="ri-arrow-left-line" id="closeCart" style="cursor:pointer;"></i>
+        <span>Your Cart</span>
+    </div>
+    <div class="cart-body" id="cartItems"></div>
+    <div class="cart-footer">
+        <div class="total-row"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+        <button class="checkout-btn" id="placeOrderBtn">Place Order</button>
+    </div>
 </aside>
 
 <div class="address-backdrop" id="addressBackdrop"></div>
 <div class="address-modal" id="addressModal">
-  <h3>Delivery Address</h3>
-  <div class="address-body">
-    <input id="addrHouse" placeholder="House / Flat No.">
-    <input id="addrStreet" placeholder="Area / Street">
-    <input id="addrPin" placeholder="Pincode">
-  </div>
-  <button class="checkout-btn" id="saveAddressBtn">Save & Continue</button>
+    <h3>Delivery Address</h3>
+    <button class="get-location-btn" id="getLocationBtn">
+        <i class="ri-map-pin-line"></i> Get My Location
+    </button>
+    <div class="coordinates-display" id="coordinatesDisplay"></div>
+    <div class="map-container" id="mapContainer"></div>
+    <div class="address-body">
+        <input id="addrHouse" placeholder="House / Flat No.">
+        <input id="addrStreet" placeholder="Area / Street">
+        <input id="addrPin" placeholder="Pincode">
+    </div>
+    <button class="checkout-btn" id="saveAddressBtn">Save & Continue</button>
 </div>
 
 <div id="successToast" class="success-toast">Order Placed Successfully!</div>
 
-<script type="module" src="../../js/grokly-app.js"></script>
+<script type="module" src="../../js/grokly-market.js"></script>
 </body>
 </html>
