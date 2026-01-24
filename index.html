@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://formspree.io https://dialogflow.cloud.google.com; media-src 'self' blob:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.gstatic.com https://cdnjs.cloudflare.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://formspree.io https://dialogflow.cloud.google.com https://maps.googleapis.com; media-src 'self' blob:;">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="N9vuWT9uGs54Yf9-Y_7DtXVS8C2GJlK0mniixKXE654" />
@@ -2263,6 +2263,15 @@
     <div id="authContainer">
 
       <button
+        id="getLocationBtn"
+        class="nav-login-btn"
+        onclick="getUserLocation()"
+        >
+        <i class="ri-map-pin-line" aria-hidden="true"></i>
+        <span>Location</span>
+        </button>
+
+      <button
         id="navLoginBtn"
         class="nav-login-btn"
         onclick="window.location.href='login.html'"
@@ -2830,7 +2839,7 @@
         <section id="contact-form" class="contact-section">
     <div class="contact-card">
         <div class="contact-header">
-            <span class="contact-badge">Concierge Support</span>
+            <span class="contact-badge">Support team</span>
             <h2>How can we assist you?</h2>
             <p>Our team is ready to help with orders, dining reservations, or technical support.</p>
         </div>
@@ -2867,7 +2876,7 @@
                         <div class="logo" style="width:110px;height:110px;font-size:18px"><img src="images/accesco_white.png" alt="Accesco Logo" width="110" height="110" loading="lazy" decoding="async"></div>
                         <div>
                             <div style="font-weight:800;color: white; font-size: 24px;">ACCESCO LIVING</div>
-                            <div style="color:var(--muted);margin-top:6px; max-width: 250px;">Empowering digital excellence through innovative solutions.</div>
+                            <div style="color:var(--muted);margin-top:6px; max-width: 250px;">Smartly Simplified For Everyday India</div>
                         </div>
                     </div>
                 </div>
@@ -2875,7 +2884,7 @@
                 <div>
                     <h4 style="color: white; letter-spacing: 1px;">COMPANY</h4>
                     <ul style="list-style:none;margin:0;padding:0;color:var(--muted);margin-top:14px;font-size:15px; line-height: 2;">
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="#about">About Us</a></li>
                         <li><a href="https://www.linkedin.com/company/acceso-living/">Careers</a></li>
                         <li><a href="partner/">Partner With Us</a></li>
                         <li><a href="terms/">Terms & Conditions</a></li>
@@ -2973,6 +2982,11 @@
     <script src="js/submit-btn-effects.js"></script>
 
     <script src="js/auth-supabase.js"></script>
+
+    <!-- Google Maps API - Replace YOUR_API_KEY with your actual Google Maps API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
+    <script src="js/location-service.js"></script>
 
     <script type="application/ld+json">
     {
