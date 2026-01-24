@@ -6,6 +6,13 @@
 ############################################
 User-agent: *
 
-Disallow:
+Disallow: /accesco-chatbot/
+Disallow: /ai-model/ 
+Disallow: /app/
+Disallow: /js/
+Disallow: /node_modules/
+Disallow: /package-lock.json
+Disallow: package.json
+
 
 Allow: /
