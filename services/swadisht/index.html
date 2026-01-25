@@ -15,68 +15,164 @@
         /* ===== HERO SECTION STYLES ===== */
         .hero-bg {
             background: linear-gradient(135deg, #FF6B35 0%, #E63946 50%, #D62828 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: floatBlob 6s ease-in-out infinite;
+        }
+        
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: floatBlob 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-20px, 20px); }
         }
 
         /* ===== MENU ITEM STYLES ===== */
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
-        }
         .menu-item {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 107, 53, 0.1);
+            background: linear-gradient(135deg, #fff 0%, #fffaf8 100%);
         }
-        .menu-item.hidden {
-            opacity: 0;
-            transform: scale(0.8);
-            pointer-events: none;
+        
+        .menu-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .menu-item:hover::before {
+            left: 100%;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(255, 107, 53, 0.2);
         }
 
         /* ===== BUTTON STYLES ===== */
         .order-btn {
-            background: linear-gradient(45deg, #FF6B35, #E63946);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #FF6B35 0%, #E63946 100%);
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            border: none;
+            font-weight: 700;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .order-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .order-btn:hover::before {
+            left: 100%;
+        }
+        
         .order-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(255, 107, 53, 0.35), 0 6px 12px rgba(230, 57, 70, 0.25);
+        }
+        
+        .order-btn:active {
+            transform: translateY(-1px) scale(1.02);
         }
 
         /* ===== HEADER STYLES ===== */
         .header-gradient {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 240, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 248, 240, 0.97) 100%);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.08);
+            position: relative;
+        }
+        
+        .header-gradient::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.4), transparent);
         }
 
         /* ===== NAVIGATION STYLES ===== */
         .nav-link {
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            color: #333;
         }
+        
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            bottom: -5px;
+            height: 3px;
+            bottom: -8px;
             left: 50%;
-            background: linear-gradient(45deg, #FF6B35, #E63946);
-            transition: all 0.3s ease;
+            background: linear-gradient(90deg, #FF6B35, #E63946);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             transform: translateX(-50%);
+            border-radius: 999px;
         }
+        
         .nav-link:hover::after {
             width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: #FF6B35 !important;
+            transform: translateY(-2px);
         }
 
         /* ===== LOGO & BRAND STYLES ===== */
         .logo-glow {
-            filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3));
-            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.25));
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        
         .logo-glow:hover {
-            filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.5));
-            transform: scale(1.05);
+            filter: drop-shadow(0 8px 20px rgba(255, 107, 53, 0.4));
+            transform: scale(1.08) translateY(-2px);
         }
+        
         .spice-decoration {
             position: absolute;
             top: -10px;
@@ -97,10 +193,137 @@
         .search-container {
             position: relative;
         }
+        
         .search-container input:focus {
             box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
         }
 
+        /* ===== CART ITEM STYLES ===== */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            background: #fff;
+        }
+
+        .cart-item:hover {
+            background: #fafafa;
+            transform: translateX(2px);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-right: 16px;
+            border: 2px solid rgba(255, 107, 53, 0.1);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            color: #111827;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: #FF6B35;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .cart-item-restaurant {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 4px 8px;
+        }
+
+        .quantity-controls button {
+            background: transparent;
+            border: none;
+            color: #FF6B35;
+            cursor: pointer;
+            font-weight: 700;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-controls button:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: scale(1.1);
+        }
+
+        .quantity-controls span {
+            width: 32px;
+            text-align: center;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .remove-item-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 12px;
+        }
+
+        .remove-item-btn:hover {
+            background: #fecaca;
+            transform: scale(1.05);
+        }
+
+        /* ===== CHECKOUT PANEL ANIMATION ===== */
+        .sticky {
+            position: sticky;
+        }
+
+        @media (max-width: 1024px) {
+            .sticky {
+                position: relative;
+            }
+        }
+
+        /* ===== PROMOTION & BENEFITS ===== */
+        .promo-banner {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+            border-left: 4px solid #FF6B35;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .promo-banner p {
+            margin: 0;
+            color: #92400e;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
         /* ===== TOAST NOTIFICATIONS ===== */
         .toast-container {
             position: fixed;
@@ -250,28 +473,91 @@
         </div>
     </section>
 
-    <section id="cart" class="py-16 bg-gray-100">
+    <section id="cart" class="py-16 bg-gradient-to-b from-gray-50 to-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Your Order</h2>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                
-                <!-- User ID Input -->
-                <div class="mb-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                    <label for="user-id" class="block text-sm font-semibold text-gray-700 mb-2">User ID (Required for Checkout)</label>
-                    <input type="text" id="user-id" placeholder="Enter your user ID" class="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Cart Items List -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-orange-500 to-red-600 p-6 text-white">
+                            <h2 class="text-3xl font-bold flex items-center">
+                                <i class="fas fa-shopping-bag mr-3"></i>Your Order
+                            </h2>
+                            <p id="cart-item-count" class="text-orange-100 mt-2">0 items in cart</p>
+                        </div>
+                        
+                        <div id="cart-items" class="divide-y max-h-[500px] overflow-y-auto">
+                            <div class="p-12 text-center">
+                                <div class="text-6xl mb-4">🛒</div>
+                                <p class="text-gray-500 text-lg font-medium">Your cart is empty</p>
+                                <p class="text-gray-400 mt-2">Add delicious dishes to get started!</p>
+                                <a href="#menu" class="inline-block mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-semibold transition">
+                                    Continue Shopping
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="cart-items" class="mb-4">
-                    <p class="text-gray-500 text-center">Your cart is empty</p>
-                </div>
-                <div class="border-t pt-4">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xl font-semibold">Total:</span>
-                        <span id="total-price" class="text-2xl font-bold text-orange-600">₹0</span>
+                <!-- Checkout Panel -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-28 bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-orange-100">
+                        <!-- Header -->
+                        <div class="bg-orange-50 p-6 border-b-2 border-orange-100">
+                            <h3 class="text-xl font-bold text-gray-800">Order Summary</h3>
+                        </div>
+
+                        <!-- Summary Details -->
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Subtotal</span>
+                                <span id="subtotal" class="font-semibold text-gray-800">₹0</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Delivery Charges</span>
+                                <span id="delivery-fee" class="font-semibold text-gray-800">₹40</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Platform Fee</span>
+                                <span id="platform-fee" class="font-semibold text-gray-800">₹0</span>
+                            </div>
+
+                            <div class="bg-green-50 border-l-4 border-green-500 p-3 rounded">
+                                <p class="text-sm text-green-800"><i class="fas fa-leaf mr-2"></i>Free delivery on orders above ₹200</p>
+                            </div>
+
+                            <div class="border-t-2 border-dashed border-gray-300 pt-4 flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-800">Total</span>
+                                <span id="total-price" class="text-3xl font-bold text-orange-600">₹0</span>
+                            </div>
+                        </div>
+
+                        <!-- User ID Section -->
+                        <div class="bg-blue-50 p-6 border-t-2 border-blue-100">
+                            <label for="user-id" class="block text-sm font-bold text-blue-900 mb-2">
+                                <i class="fas fa-user-circle mr-2"></i>User ID (Required)
+                            </label>
+                            <input type="text" id="user-id" placeholder="Enter your user ID" class="w-full px-4 py-3 rounded-lg border-2 border-blue-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition">
+                            <p class="text-xs text-blue-700 mt-2">This will be used to track your order</p>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        <div class="p-6 bg-gray-50">
+                            <button onclick="placeOrder()" class="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                                <i class="fas fa-lock mr-2"></i>Proceed to Checkout
+                            </button>
+                            <p class="text-center text-xs text-gray-500 mt-3">Secure & Encrypted Payment</p>
+                        </div>
+
+                        <!-- Info Box -->
+                        <div class="px-6 pb-6">
+                            <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                                <p class="text-xs text-amber-900"><i class="fas fa-info-circle mr-2"></i>All prices are inclusive of GST</p>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="placeOrder()" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg text-lg font-semibold transition">
-                        Place Order
-                    </button>
                 </div>
             </div>
         </div>
