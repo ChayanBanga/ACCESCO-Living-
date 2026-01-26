@@ -56,6 +56,21 @@ async function performSmartResearchAndCalc() {
   btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> ANALYZING...`;
   document.getElementById('logicStatus').classList.add('hidden');
 
+  // Edited by me
+  // Input Validation Rent / Monthly EMI
+  if (setupRent < 0 || setupRent > income) {
+  showToast("Invalid rent ammount.", "error");
+  return;
+  }
+  // Edited by me
+  // Input Validation city
+  const alphaNumRegex = /^[a-zA-Z0-9 ]+$/;
+  if (!alphaNumRegex.test(city) || city.length < 2 || city.length > 50) {
+    showToast("Invalid City name.", "error");
+    return;
+  }
+  
+
   // 1. OFFLINE FALLBACK LOGIC
   // We calculate this first so even if API fails, the user gets a result
   const incomePerCapita = income / members;
