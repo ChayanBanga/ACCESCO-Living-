@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://formspree.io https://dialogflow.cloud.google.com; media-src 'self' blob:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.gstatic.com https://cdnjs.cloudflare.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://formspree.io https://dialogflow.cloud.google.com https://maps.googleapis.com; media-src 'self' blob:;">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="N9vuWT9uGs54Yf9-Y_7DtXVS8C2GJlK0mniixKXE654" />
   <meta name="description" content="Accesco Living - India's unified daily-living ecosystem. Groceries, fashion, food, finance, and rentals in one intelligent app.">
   <meta name="theme-color" content="#fff2eb">
-  <title>ACCESCO - Access Everything </title>
+  <title>ACCESCO - Smartly Simplified For Everyday India </title>
   <meta property="og:type" content="website">
 <meta property="og:url" content="https://accesco.co.in/">
 <meta property="og:title" content="ACCESCO - Access Everything">
@@ -21,11 +21,21 @@
 <meta property="twitter:title" content="ACCESCO - Access Everything">
 <meta property="twitter:description" content="India's unified daily-living ecosystem.">
 <meta property="twitter:image" content="https://accesco.co.in/images/accesco_white.png">
+<meta name="p:domain_verify" content="a4bb02b76aacd3106061fc8cae3fb963"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://images.unsplash.com">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-84T26KB3LT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-84T26KB3LT');
+  </script>
 
   <link rel="preload" as="image" href="images/poster.jpg" fetchpriority="high">
   <link rel="canonical" href="https://www.accescoliving.com/" />
@@ -74,16 +84,29 @@
     .sm-toggle-custom {
         position: fixed; top: 24px; left: 24px;
         z-index: 10003;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255,255,255,0.4);
+        background: linear-gradient(135deg, rgba(112, 4, 87, 0.9), rgba(160, 30, 125, 0.8));
+        backdrop-filter: blur(16px);
+        border: 2px solid rgba(255,255,255,0.6);
         border-radius: 999px;
-        padding: 12px 20px;
+        padding: 16px 28px;
         cursor: pointer;
-        display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800;
+        display: flex; align-items: center; gap: 14px; color: #fff; font-weight: 900;
         text-transform: uppercase;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
+        box-shadow: 0 16px 48px rgba(112, 4, 87, 0.5), inset 0 1px 0 rgba(255,255,255,0.4), 0 0 20px rgba(112, 4, 87, 0.3);
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        letter-spacing: 1px;
+        font-size: 12px;
+    }
+    
+    .sm-toggle-custom:hover {
+        background: linear-gradient(135deg, rgba(112, 4, 87, 1), rgba(160, 30, 125, 0.95));
+        transform: translateY(-3px);
+        box-shadow: 0 20px 60px rgba(112, 4, 87, 0.6), inset 0 1px 0 rgba(255,255,255,0.5), 0 0 30px rgba(112, 4, 87, 0.4);
+        border-color: rgba(255,255,255,0.8);
+    }
+    
+    .sm-toggle-custom:active {
+        transform: translateY(-1px);
     }
 
     /* ===== UPDATED 3-LINE MENU ICON ===== */
@@ -172,72 +195,142 @@
     }
 
     .sm-panel-item {
-        font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+        font-size: clamp(1.6rem, 3.5vw, 2rem); /* Responsive font size */
         font-weight: 900; 
         text-transform: uppercase;
         color: #1a0014; 
         display: block; 
-        line-height: 1.1;
-        transition: all 0.01s ease;
-        letter-spacing: -1px;
+        line-height: 1.2;
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        letter-spacing: -0.6px;
         text-decoration: none;
-    }
-
-    .sm-panel-item:hover { 
-        color: var(--accent); 
-        transform: translateX(10px);
+        position: relative;
+        padding: 8px 0 8px 12px;
     }
     
-    .sm-socials {
-        margin-top: auto; /* Sticky to bottom */
-        padding-top: 30px;
-        border-top: 1px solid rgba(0,0,0,0.05);
+    .sm-panel-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+        border-radius: 3px;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+        box-shadow: 0 0 0 0 rgba(112, 4, 87, 0);
+    }
+
+    .sm-panel-item:hover {
+        color: var(--accent); 
+        transform: translateX(14px);
+    }
+    
+    .sm-panel-item:hover::before {
+        transform: scaleY(1);
+        box-shadow: 0 0 12px rgba(112, 4, 87, 0.4);
     }
 
     .sm-socials h3 {
-        font-size: 12px;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 18px;
+        margin-top: 0;
+        font-weight: 900;
         color: var(--accent);
         text-transform: uppercase;
     }
 
     .sm-social-icons {
         display: flex; 
-        gap: 18px; 
-        font-size: 24px; 
+        gap: 16px; 
+        font-size: 22px; 
         flex-wrap: wrap;
     }
 
     .sm-social-icons a {
         color: #1a0014;
-        transition: transform 0.2s ease, color 0.2s ease;
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease, background 0.25s ease;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(112, 4, 87, 0.05);
     }
 
     .sm-social-icons a:hover {
-        color: var(--accent);
-        transform: translateY(-5px);
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        transform: translateY(-6px) scale(1.1);
+        box-shadow: 0 10px 24px rgba(112, 4, 87, 0.25);
     }
     /* ===== INSTANT & RESPONSIVE SIDEBAR ===== */
     .staggered-menu-panel {
         position: fixed; 
         top: 0; 
         left: 0;
-        width: clamp(280px, 85vw, 450px); /* Responsive width */
-        height: 100%; 
-        background: white; 
-        padding: 8em 2.5em 3em 2.5em; 
+        width: clamp(320px, 85vw, 520px); /* Responsive width */
+        height: 100vh; 
+        background: linear-gradient(180deg, #fff8f5 0%, #fff2eb 40%, #f5e8e0 100%);
+        padding: 10em 3.5em 4em 3.5em; 
         z-index: 10001; 
         display: none; /* Hidden by default */
         flex-direction: column;
-        box-shadow: 20px 0 60px rgba(0,0,0,0.08);
-        /* TRANSITION REMOVED FOR INSTANT OPENING */
+        box-shadow: 40px 0 100px rgba(112, 4, 87, 0.2), inset -2px 0 0 rgba(112, 4, 87, 0.1);
+        overflow-y: auto;
+        animation: slideInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
     
-    /* Class added via JS to show the panel instantly */
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideOutLeft {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+    }
+    
+    /* Class added via JS to show the panel */
     .staggered-menu-panel.active {
         display: flex;
+        animation: slideInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    /* Closing state */
+    .staggered-menu-panel.closing {
+        animation: slideOutLeft 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    .staggered-menu-panel::-webkit-scrollbar {
+        width: 6px;
+    }
+    .staggered-menu-panel::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .staggered-menu-panel::-webkit-scrollbar-thumb {
+        background: rgba(112, 4, 87, 0.2);
+        border-radius: 999px;
+        transition: background 0.3s ease;
+    }
+    .staggered-menu-panel::-webkit-scrollbar-thumb:hover {
+        background: rgba(112, 4, 87, 0.4);
     }
 
     .sm-panel-inner {
@@ -248,20 +341,32 @@
     }
 
     .sm-panel-list { 
-        list-style: none !important; /* No bullets */
+        list-style: none !important;
         padding: 0; 
         margin: 0; 
         display: flex;
         flex-direction: column;
-        gap: clamp(15px, 4vh, 30px); /* Responsive spacing */
+        gap: clamp(15px, 4vh, 30px);
     }
 
-    .sm-panel-item {
-        font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
-        font-weight: 900; 
-        text-transform: uppercase;
-        color: #1a0014; 
-        text-decoration: none;
+    /* Mobile-specific adjustments */
+    @media (max-width: 480px) {
+        .staggered-menu-panel { 
+            padding: 7em 2em 2.5em 2em;
+            width: 100%;
+        }
+        .sm-toggle-custom {
+            top: 16px;
+            left: 16px;
+            padding: 12px 18px;
+            font-size: 11px;
+        }
+        .sm-panel-item {
+            font-size: clamp(1.7rem, 5vw, 2.2rem);
+        }
+        .sm-panel-list {
+            gap: clamp(12px, 3vh, 25px);
+        }
     }
 
     .sm-line {
@@ -276,27 +381,11 @@
         padding-top: 30px;
         border-top: 1px solid rgba(0,0,0,0.05);
     }
-    /* Mobile-specific adjustments */
-    @media (max-width: 480px) {
-        .staggered-menu-panel { 
-            padding: 6em 1.5em 2em 1.5em; 
-        }
-        .sm-toggle-custom {
-            top: 16px;
-            left: 16px;
-            padding: 10px 16px;
-        }
-    }
+    
     /* Only highlight when the user actually hovers */
     .sm-panel-item:hover { 
         color: var(--accent); 
         transform: translateX(10px);
-    }
-    
-    .sm-socials {
-        margin-top: auto; /* Keeps socials at the bottom of the screen */
-        padding-top: 30px;
-        border-top: 1px solid rgba(0,0,0,0.05);
     }
 
     .sm-social-icons {
@@ -2263,6 +2352,15 @@
     <div id="authContainer">
 
       <button
+        id="getLocationBtn"
+        class="nav-login-btn"
+        onclick="getUserLocation()"
+        >
+        <i class="ri-map-pin-line" aria-hidden="true"></i>
+        <span>Location</span>
+        </button>
+
+      <button
         id="navLoginBtn"
         class="nav-login-btn"
         onclick="window.location.href='login.html'"
@@ -2595,7 +2693,7 @@
 
             <div class="about-new-layout">
                 <div class="about-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=85" alt="Accesco Team Collaboration" width="600" height="400" loading="lazy" decoding="async">
+                    <img src="images/about.jpeg" alt="Accesco Team Collaboration" width="600" height="400" loading="lazy" decoding="async">
                 </div>
 
                 <div class="about-text-content">
@@ -2607,20 +2705,7 @@
                         <li><i class="ri-sparkling-2-line"></i>Curated lifestyle drops, fashion rentals, and premium dining in one tap.</li>
                         <li><i class="ri-shield-check-line"></i>Financial clarity and Vault-grade safety built into your day.</li>
                     </ul>
-                    <div class="about-stats">
-                        <div class="stat-block">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">cities on roadmap</span>
-                        </div>
-                        <div class="stat-block">
-                            <span class="stat-number">50k+</span>
-                            <span class="stat-label">monthly orders</span>
-                        </div>
-                        <div class="stat-block">
-                            <span class="stat-number">4.8★</span>
-                            <span class="stat-label">user love</span>
-                        </div>
-                    </div>
+                    
                     <a href="#contact" style="margin-top: 12px; font-weight: 800; color: var(--accent); display: inline-flex; align-items: center; gap: 8px; letter-spacing: 0.3px;">
                         Join the revolution <i class="ri-arrow-right-line"></i>
                     </a>
@@ -2830,7 +2915,7 @@
         <section id="contact-form" class="contact-section">
     <div class="contact-card">
         <div class="contact-header">
-            <span class="contact-badge">Concierge Support</span>
+            <span class="contact-badge">Support team</span>
             <h2>How can we assist you?</h2>
             <p>Our team is ready to help with orders, dining reservations, or technical support.</p>
         </div>
@@ -2867,7 +2952,7 @@
                         <div class="logo" style="width:110px;height:110px;font-size:18px"><img src="images/accesco_white.png" alt="Accesco Logo" width="110" height="110" loading="lazy" decoding="async"></div>
                         <div>
                             <div style="font-weight:800;color: white; font-size: 24px;">ACCESCO LIVING</div>
-                            <div style="color:var(--muted);margin-top:6px; max-width: 250px;">Empowering digital excellence through innovative solutions.</div>
+                            <div style="color:var(--muted);margin-top:6px; max-width: 250px;">Smartly Simplified For Everyday India</div>
                         </div>
                     </div>
                 </div>
@@ -2875,7 +2960,7 @@
                 <div>
                     <h4 style="color: white; letter-spacing: 1px;">COMPANY</h4>
                     <ul style="list-style:none;margin:0;padding:0;color:var(--muted);margin-top:14px;font-size:15px; line-height: 2;">
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="#about">About Us</a></li>
                         <li><a href="https://www.linkedin.com/company/acceso-living/">Careers</a></li>
                         <li><a href="partner/">Partner With Us</a></li>
                         <li><a href="terms/">Terms & Conditions</a></li>
@@ -2970,9 +3055,15 @@
 
     <script src="js/stack-cards.js"></script>
 
+    <script src="js/sidebar-menu.js"></script>
     <script src="js/submit-btn-effects.js"></script>
 
     <script src="js/auth-supabase.js"></script>
+
+    <!-- Google Maps API - Replace YOUR_API_KEY with your actual Google Maps API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
+    <script src="js/location-service.js"></script>
 
     <script type="application/ld+json">
     {
@@ -3055,7 +3146,7 @@
     chat-title="ACCESCO AI"
     agent-id="8beafa4a-339b-44ff-a386-62d386a2481b"
     language-code="en"
-    chat-icon="https://github.com/accescoliving-tech/ACCESCO-Living-/blob/main/images/IMG_5111.PNG?raw=true">
+    chat-icon=".\images\IMG_5111.PNG">
 </df-messenger>
 
 <script src="js/dialogflow-messenger.js"></script>
