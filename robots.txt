@@ -1,18 +1,122 @@
-# robots.txt
-# Location: https://accesco.co.in/robots.txt
-
-############################################
-# Global rules (apply to all crawlers)
-############################################
-User-agent: *
-
-Disallow: /accesco-chatbot/
-Disallow: /ai-model/ 
-Disallow: /app/
-Disallow: /js/
-Disallow: /node_modules/
-Disallow: /package-lock.json
-Disallow: package.json
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
-Allow: /
+<url>
+  <loc>https://accesco.co.in/</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/services/grokly/</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/services/swadisht/</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/services/instastyle/</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/services/dineout/</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/services/accesgo/</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/calculator/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/flappybird/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/quiz/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/cards/card.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/flappybird/race.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/services/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/partner/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/terms/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/certificates/QTC.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/blogs/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/zombies/zombie.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/stick/stick.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/games/snake/snake.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://accesco.co.in/certificates/index.html</loc>
+  <lastmod>2026-02-09T05:06:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
