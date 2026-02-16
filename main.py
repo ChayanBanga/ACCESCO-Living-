@@ -480,7 +480,7 @@ HTML_TEMPLATE = """
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="brand">ACCESSCO LIVING</div>
+            <div class="brand">ACCESCO LIVING</div>
             <h1 class="title">Gift Oracle</h1>
             <div class="subtitle">Curated. Intelligent. Luxurious.</div>
         </div>
