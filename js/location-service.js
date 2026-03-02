@@ -119,97 +119,90 @@ function displayLocationModal(lat, lng, accuracy) {
   setTimeout(() => {
     initializeMap(lat, lng);
   }, 100);
-
-  // Get address using Geocoding API
-  getAddressFromCoordinates(lat, lng);
 }
 
-// Initialize Google Map with proper sizing
+  // Get address using Geocoding API
+ function getAddressFromCoordinates(lat, lng) {
+  const addressElement = document.getElementById('addressText');
+  if (!addressElement) return;
+
+  if (typeof google === 'undefined' || !google.maps) {
+    addressElement.textContent = 'Google Maps not loaded';
+    return;
+  }
+
+  try {
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode(
+      {
+        location: {
+          lat: parseFloat(lat),
+          lng: parseFloat(lng)
+        }
+      },
+      function (results, status) {
+        if (status === 'OK' && results && results[0]) {
+          addressElement.textContent = results[0].formatted_address;
+          addressElement.style.color = '#222';
+        } else {
+          console.warn('Geocoder failed:', status);
+
+          if (status === 'REQUEST_DENIED') {
+            addressElement.textContent = 'Geocoding API not enabled';
+          } else if (status === 'ZERO_RESULTS') {
+            addressElement.textContent = 'No address found';
+          } else {
+            addressElement.textContent = 'Could not retrieve address';
+          }
+
+          addressElement.style.color = '#999';
+        }
+      }
+    );
+
+  } catch (error) {
+    console.error('Geocoder error:', error);
+    addressElement.textContent = 'Geocoder failed to load';
+  }
+}
+
 function initializeMap(lat, lng) {
   const mapElement = document.getElementById('locationMap');
-  
   if (!mapElement) return;
-  
-  // Clear loading text
+
   mapElement.innerHTML = '';
-  
+
+  if (typeof google === 'undefined' || !google.maps) {
+    mapElement.innerHTML = '<span style="color:#999;">Google Maps library not loaded.</span>';
+    return;
+  }
+
   try {
-    if (typeof google === 'undefined' || !google.maps) {
-      mapElement.innerHTML = '<span style="color: #999;">Map not available. Check API key.</span>';
-      return;
-    }
+    const location = {
+      lat: parseFloat(lat),
+      lng: parseFloat(lng)
+    };
 
     const map = new google.maps.Map(mapElement, {
       zoom: 15,
-      center: { lat: parseFloat(lat), lng: parseFloat(lng) },
+      center: location,
       mapTypeControl: false,
       fullscreenControl: false
     });
 
-    // Add marker
-    const marker = new google.maps.Marker({
-      position: { lat: parseFloat(lat), lng: parseFloat(lng) },
+    new google.maps.Marker({
+      position: location,
       map: map,
-      title: 'Your Location',
-      animation: google.maps.Animation.DROP
+      title: 'Your Location'
     });
+    getAddressFromCoordinates(lat, lng);
+
   } catch (error) {
     console.error('Map initialization error:', error);
-    mapElement.innerHTML = '<span style="color: #c33;">Failed to load map</span>';
+    mapElement.innerHTML = '<span style="color:#c33;">Failed to load map</span>';
   }
 }
-
-// Get address from coordinates using Google Maps Geocoding API
-function getAddressFromCoordinates(lat, lng) {
-  const addressElement = document.getElementById('addressText');
-  
-  // Check if geocoder is available
-  if (typeof google === 'undefined' || !google.maps || !google.maps.Geocoder) {
-    if (addressElement) {
-      addressElement.textContent = 'Geocoder not available';
-      addressElement.style.color = '#999';
-    }
-    return;
-  }
-
-  const geocoder = new google.maps.Geocoder();
-  const latlng = { lat: parseFloat(lat), lng: parseFloat(lng) };
-
-  geocoder.geocode({ location: latlng }, (results, status) => {
-    if (!addressElement) return;
-
-    if (status === 'OK' && results && results[0]) {
-      const address = results[0].formatted_address;
-      addressElement.textContent = address;
-      addressElement.style.color = '#222';
-    } else {
-      // Fallback: show coordinates if geocoding fails
-      console.warn('Geocoding status:', status);
-      
-      if (status === 'ZERO_RESULTS') {
-        addressElement.textContent = 'No address found for this location';
-      } else if (status === 'REQUEST_DENIED') {
-        addressElement.textContent = 'Geocoding API not configured (check API key)';
-      } else if (status === 'INVALID_REQUEST') {
-        addressElement.textContent = 'Invalid location data';
-      } else {
-        addressElement.textContent = 'Could not retrieve address';
-      }
-      
-      addressElement.style.color = '#999';
-      addressElement.style.fontSize = '12px';
-    }
-  });
-}
-
-// Close location modal
-function closeLocationModal() {
-  const modal = document.getElementById('locationModal');
-  if (modal) {
-    modal.remove();
-  }
-}
-
 // Copy location coordinates to clipboard
 function copyLocationCoords(lat, lng) {
   const coords = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
