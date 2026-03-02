@@ -6,8 +6,7 @@
 // Get user location and display on map
 function getUserLocation() {
   const btn = document.getElementById('getLocationBtn');
-  
-  // Check if Geolocation API is supported
+
   if (!navigator.geolocation) {
     alert('Geolocation is not supported by your browser.');
     return;
