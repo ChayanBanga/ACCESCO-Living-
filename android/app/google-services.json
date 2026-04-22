@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "15573755716",
+    "project_id": "accessco-living",
+    "storage_bucket": "accessco-living.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15573755716:android:9b5e1700cead4d8d6e5911",
+        "android_client_info": {
+          "package_name": "com.accesco.living"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqY_HTZwfAUeYuHtf8faYxIsdmi3-ujdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
