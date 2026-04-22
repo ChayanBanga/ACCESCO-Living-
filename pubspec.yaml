@@ -1,0 +1,82 @@
+name: accesco_living_app
+description: A super app for Accesco Living Pvt Ltd with complete e-commerce features.
+
+publish_to: "none"
+
+version: 2.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # Local Storage
+  shared_preferences: ^2.2.2
+  
+  # Utilities
+  intl: ^0.19.0
+  
+  # HTTP client — used by Swadisht for Google Places API calls
+  http: ^1.2.1
+  
+  # UI Components
+  badges: ^3.1.2
+  flutter_spinkit: ^5.2.0
+  shimmer: ^3.0.0
+  animate_do: ^3.1.2
+  glass_kit: ^4.0.2
+  
+  # Location
+  geolocator: ^13.0.0
+  geocoding: ^3.0.0
+  permission_handler: ^11.3.1
+  
+  # Images
+  cached_network_image: ^3.3.1
+  image_picker: ^1.1.2
+  
+  # Speech
+  speech_to_text: ^7.0.0
+  
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.3.2
+  
+  # Charts for CalcIQ
+  fl_chart: ^0.69.0
+  
+  # QR Code
+  qr_flutter: ^4.1.0
+  
+  # Google Fonts
+  google_fonts: ^6.2.1
+
+  # Carousel for hero banners
+  carousel_slider: ^4.2.1
+  
+  # Smooth page indicator
+  smooth_page_indicator: ^1.1.0
+
+  # Video player for hero background
+  video_player: ^2.9.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/images/accesco_logo.png
+    - assets/videos/
+    - assets/images/grokly_hero_banner.png
