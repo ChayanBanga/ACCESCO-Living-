@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Dog AI - Split View</title>
+    <style>
+        :root {
+            --primary: #fc8019;
+            --bg: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Split Layout */
+        .sidebar {
+            width: 350px;
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .main-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+
+        /* Header */
+        .header {
+            padding: 15px 25px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+        }
+
+        .header h2 { margin: 0; font-size: 1.2rem; }
+
+        /* Knowledge Chunks Styling */
+        .chunk-container {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #555;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .sidebar h3 {
+            font-size: 0.9rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* Chat Area */
+        .chat-box {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background: #f1f1f1;
+            color: #333;
+            border-bottom-left-radius: 2px;
+        }
+
+        /* Input Area */
+        .input-container {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            outline: none;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover { background: #000; }
+
+        .loading-text {
+            font-style: italic;
+            color: #999;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <h3>Retrieved Context</h3>
+        <div id="chunk-list">
+            <p style="color: #bbb; font-size: 0.9rem;">Relevant documentation will appear here as you ask questions...</p>
+        </div>
+    </div>
+
+    <div class="main-chat">
+        <div class="header">
+            <h2>🐶 Expert AI</h2>
+            <select id="language-selector" style="padding: 5px 10px; border-radius: 15px;">
+                <option value="English">English</option>
+                <option value="German">Deutsch</option>
+                <option value="French">Français</option>
+                <option value="Spanish">Español</option>
+            </select>
+        </div>
+
+        <div class="chat-box" id="chat-box">
+            <div class="message ai-message">Ask me anything about dog training! I'll show you my sources on the left.</div>
+        </div>
+
+        <div id="loading" class="loading-text" style="padding: 0 25px 10px;">AI is thinking...</div>
+
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your question..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById("user-input");
+            const chatBox = document.getElementById("chat-box");
+            const chunkList = document.getElementById("chunk-list");
+            const loading = document.getElementById("loading");
+            const lang = document.getElementById("language-selector").value;
+
+            const query = input.value.trim();
+            if (!query) return;
+
+            // 1. Add User Message
+            appendMessage(query, "user-message");
+            input.value = "";
+            loading.style.display = "block";
+            
+            // 2. Clear previous chunks and show "Retrieving..."
+            chunkList.innerHTML = "<em>Retrieving relevant facts...</em>";
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ query: query, language: lang })
+                });
+
+                const data = await response.json();
+                
+                // 3. Populate Chunks immediately (even though HTTP returns both at once, 
+                // we handle them first in the UI logic)
+                chunkList.innerHTML = "";
+                if (data.sources) {
+                    data.sources.forEach(text => {
+                        const div = document.createElement("div");
+                        div.className = "chunk-container";
+                        div.innerText = text;
+                        chunkList.appendChild(div);
+                    });
+                }
+
+                // 4. Show AI Response
+                loading.style.display = "none";
+                appendMessage(data.answer, "ai-message");
+
+            } catch (err) {
+                loading.style.display = "none";
+                appendMessage("Error: Backend not reachable.", "ai-message");
+            }
+        }
+
+        function appendMessage(text, className) {
+            const chatBox = document.getElementById("chat-box");
+            const msg = document.createElement("div");
+            msg.className = `message ${className}`;
+            msg.innerHTML = text.replace(/\n/g, "<br>");
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
