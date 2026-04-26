@@ -1,0 +1,146 @@
+use accesco_app;
+
+-- =========================================================================
+-- 1. USERS
+-- Stores core authentication, profile, and role data for the platform.
+-- =========================================================================
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(20) UNIQUE NOT NULL,
+    password VARCHAR(255),
+    role ENUM('customer', 'vendor', 'admin') DEFAULT 'customer',
+    
+    -- Profile display (e.g., 'male', 'female', or image URL)
+    profile_image TEXT,
+
+    city VARCHAR(100),
+    state VARCHAR(100),
+    country VARCHAR(100) DEFAULT 'India',
+    latitude DECIMAL(10,8),
+    longitude DECIMAL(11,8),
+
+    business_name VARCHAR(150),
+    business_type VARCHAR(100),
+    is_vendor_verified BOOLEAN DEFAULT FALSE,
+
+    -- Firebase Authentication ID for secure token matching
+    firebase_uid VARCHAR(255) UNIQUE,
+
+    is_verified BOOLEAN DEFAULT FALSE,
+    is_active BOOLEAN DEFAULT TRUE,
+
+    last_login TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- =========================================================================
+-- 2. ADDRESSES
+-- Stores saved delivery locations for Grokly, Swadisht, and InstaStyle.
+-- =========================================================================
+CREATE TABLE addresses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    address_label VARCHAR(50) DEFAULT 'Home', 
+    full_address TEXT,
+    city VARCHAR(100),
+    state VARCHAR(100),
+    pincode VARCHAR(10),
+    latitude DECIMAL(10,8),
+    longitude DECIMAL(11,8),
+    is_default BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- =========================================================================
+-- 3. CART SYSTEM
+-- Manages the active shopping session. One cart per user.
+-- =========================================================================
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Links static frontend products (or API items) to the user's cart
+CREATE TABLE cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
+    product_id INT NOT NULL,
+    name VARCHAR(150),
+    price DECIMAL(10,2),
+    image_url TEXT,
+    emoji VARCHAR(10),
+    quantity INT DEFAULT 1,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_cart_product (cart_id, product_id)
+);
+
+-- =========================================================================
+-- 4. ORDER MANAGEMENT
+-- Stores completed checkouts and financial summaries.
+-- =========================================================================
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    address_id INT NOT NULL, 
+    subtotal DECIMAL(10,2),
+    delivery_fee DECIMAL(10,2),
+    tax DECIMAL(10,2),
+    total_amount DECIMAL(10,2) NOT NULL,
+    status ENUM('pending', 'confirmed', 'preparing', 'out_for_delivery', 'delivered', 'cancelled') DEFAULT 'pending',
+    payment_status ENUM('pending', 'paid', 'failed') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES addresses(id)
+);
+
+-- Stores individual items captured at the time of purchase
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    name VARCHAR(150),
+    price DECIMAL(10,2),
+    image_url TEXT,
+    emoji VARCHAR(10),
+    quantity INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
+-- =========================================================================
+-- 5. DINEX BOOKINGS
+-- Handles table reservations made via the Google Places API integration.
+-- =========================================================================
+CREATE TABLE dinex_bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(128) NOT NULL, -- Firebase UID
+    restaurant_id VARCHAR(255) NOT NULL, -- Google Place ID
+    restaurant_name VARCHAR(255) NOT NULL,
+    guests INT NOT NULL,
+    booking_date DATE NOT NULL,
+    booking_time TIME NOT NULL,
+    image_url TEXT,
+    status ENUM('confirmed', 'completed', 'cancelled') DEFAULT 'confirmed',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =========================================================================
+-- 6. NOTIFICATIONS
+-- Centralized inbox for order updates, table confirmations, and promotions.
+-- =========================================================================
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL, -- Firebase UID
+    type VARCHAR(50) NOT NULL, -- e.g., 'order', 'booking', 'offer'
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    target_id VARCHAR(255), -- Reference to order_id or booking_id
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
